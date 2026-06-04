@@ -2653,18 +2653,18 @@ body.lightbox-open { overflow: hidden; }
 }
 .legacy-grid.rail::-webkit-scrollbar { display: none; }
 .legacy-grid.rail .legacy-card {
-  flex: 0 0 clamp(260px, 26vw, 340px) !important;
+  flex: 0 0 calc((100% - 4rem) / 3) !important;
   scroll-snap-align: start;
   min-width: 0;
   grid-column: auto !important;
 }
 @media (max-width: 980px) {
   .legacy-grid.rail { display: flex !important; grid-template-columns: none !important; }
-  .legacy-grid.rail .legacy-card { flex: 0 0 clamp(260px, 40vw, 320px) !important; grid-column: auto !important; }
+  .legacy-grid.rail .legacy-card { flex: 0 0 calc((100% - 2.5rem) / 2) !important; grid-column: auto !important; }
 }
 @media (max-width: 560px) {
   .legacy-grid.rail { display: flex !important; grid-template-columns: none !important; gap: 1rem !important; }
-  .legacy-grid.rail .legacy-card { flex: 0 0 82% !important; grid-column: auto !important; }
+  .legacy-grid.rail .legacy-card { flex: 0 0 85% !important; grid-column: auto !important; }
 }
 .legacy-card {
   display: flex;
