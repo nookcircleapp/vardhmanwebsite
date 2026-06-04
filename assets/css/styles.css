@@ -1399,14 +1399,13 @@ section { position: relative; }
 .logo-mark-section {
   padding: clamp(4rem, 7vw, 6rem) var(--gutter);
   background: var(--black);
-  display: flex;
-  justify-content: center;
 }
 .logo-mark-inner {
   position: relative;
   width: 100%;
   max-width: 520px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   aspect-ratio: 16/9;
   border: 1px solid var(--gold);
   border-radius: 22px;
