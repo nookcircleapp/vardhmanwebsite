@@ -1407,10 +1407,10 @@ section { position: relative; }
   margin-left: auto;
   margin-right: auto;
   aspect-ratio: 16/9;
-  border: 1px solid var(--gold);
-  border-radius: 22px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(212,175,106,0.05));
-  box-shadow: 0 0 0 6px rgba(212,175,106,0.12), 0 40px 90px -30px rgba(0,0,0,0.75);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   overflow: hidden;
   display: flex;
   align-items: center;
