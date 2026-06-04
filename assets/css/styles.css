@@ -1405,7 +1405,8 @@ section { position: relative; }
 .logo-mark-inner {
   position: relative;
   width: 100%;
-  max-width: 720px;
+  max-width: 440px;
+  margin: 0 auto;
   aspect-ratio: 16/9;
   border: 1px solid var(--gold);
   border-radius: 22px;
