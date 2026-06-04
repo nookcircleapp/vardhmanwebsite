@@ -1397,18 +1397,17 @@ section { position: relative; }
 
 /* --- Logo mark section (centered framed logo with gloss) --- */
 .logo-mark-section {
-  padding: clamp(2.5rem, 5vw, 4rem) var(--gutter);
+  padding: clamp(4rem, 7vw, 6rem) var(--gutter);
   background: var(--black);
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .logo-mark-inner {
   position: relative;
   width: 100%;
-  max-width: 280px;
+  max-width: 520px;
   margin: 0 auto;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
   border: 1px solid var(--gold);
   border-radius: 22px;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(212,175,106,0.05));
