@@ -2644,7 +2644,7 @@ body.lightbox-open { overflow: hidden; }
   scrollbar-width: none;
   padding: 1rem var(--gutter) 2rem;
   scroll-padding-left: var(--gutter);
-  max-width: 100%;
+  max-width: var(--max-wide);
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
