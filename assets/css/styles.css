@@ -1799,6 +1799,8 @@ section { position: relative; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: 720px;
+  margin: 0 auto;
 }
 .facade-render {
   margin: 0;
