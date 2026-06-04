@@ -1417,6 +1417,36 @@ section { position: relative; }
   justify-content: center;
   padding: clamp(2rem, 4vw, 3.5rem);
 }
+.logo-mark-figure {
+  position: relative;
+  display: inline-flex;
+  line-height: 0;
+}
+.logo-mark-figure img { display: block; }
+.logo-mark-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.9) 50%, transparent 62%);
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  background-position: -150% 0;
+  -webkit-mask-image: url('https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/vardhman%20images%20and%20reels/Vardhman%20Images%20and%20videos/faimont3d.png');
+          mask-image: url('https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/vardhman%20images%20and%20reels/Vardhman%20Images%20and%20videos/faimont3d.png');
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  mix-blend-mode: overlay;
+  animation: logoShine 4.5s ease-in-out infinite;
+}
+@keyframes logoShine {
+  0%   { background-position: -150% 0; }
+  55%  { background-position: 250% 0; }
+  100% { background-position: 250% 0; }
+}
 .logo-mark-inner img {
   max-width: 78%;
   max-height: 82%;
