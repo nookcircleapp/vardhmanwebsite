@@ -2663,8 +2663,20 @@ body.lightbox-open { overflow: hidden; }
   .legacy-grid.rail .legacy-card { flex: 0 0 calc((100% - 2.5rem) / 2) !important; grid-column: auto !important; }
 }
 @media (max-width: 560px) {
-  .legacy-grid.rail { display: flex !important; grid-template-columns: none !important; gap: 1rem !important; }
-  .legacy-grid.rail .legacy-card { flex: 0 0 85% !important; grid-column: auto !important; }
+  .legacy-grid.rail {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 0.75rem !important;
+    padding: 1rem 0.75rem 2rem !important;
+    scroll-padding-left: 0.75rem !important;
+  }
+  .legacy-grid.rail .legacy-card {
+    flex: 0 0 calc(100% - 0.75rem) !important;
+    grid-column: auto !important;
+    padding: 2.25rem 1.75rem !important;
+  }
+  .legacy-grid.rail .legacy-card h3 { font-size: 1.3rem; }
+  .legacy-grid.rail .legacy-card p { font-size: 0.95rem; }
 }
 .legacy-card {
   display: flex;
