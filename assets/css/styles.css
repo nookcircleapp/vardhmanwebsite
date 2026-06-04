@@ -1492,7 +1492,7 @@ section { position: relative; }
   animation: pulseDot 2s ease-out infinite;
 }
 @media (max-width: 720px) {
-  .logo-tile-status { top: 0.75rem; right: 0.75rem; padding: 0.3rem 0.7rem; font-size: 0.55rem; letter-spacing: 0.1em; }
+  .logo-tile-status { top: 0.75rem; left: 0.75rem; right: auto; padding: 0.3rem 0.7rem; font-size: 0.55rem; letter-spacing: 0.1em; }
 }
 .logo-tile:hover .logo-tile-pill {
   background: rgba(212,175,106,0.18);
