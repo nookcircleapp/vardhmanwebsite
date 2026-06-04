@@ -26,3 +26,5 @@ _gen_*.js
 _swap*.js
 _strip*.js
 _replace*.js
+
+.vercel
