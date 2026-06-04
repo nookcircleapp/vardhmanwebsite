@@ -1391,6 +1391,81 @@ section { position: relative; }
 .cinematic.light .cinematic-card.right { margin-left: auto; }
 .cinematic.right .cinematic-card { margin-left: auto; }
 
+/* --- Logo tiles (Projects: current chapter) --- */
+.logo-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.logo-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+.logo-tile-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(212,175,106,0.04));
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  transition: border-color 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.logo-tile-frame img {
+  max-width: 75%;
+  max-height: 80%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.35));
+}
+.logo-tile-gloss {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.05) 35%, rgba(212,175,106,0.35) 50%, rgba(255,255,255,0.05) 65%, transparent 100%);
+  transform: skewX(-20deg);
+  animation: logoGloss 4.5s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.logo-tile:hover .logo-tile-frame { border-color: rgba(212,175,106,0.55); transform: translateY(-4px); }
+.logo-tile-pill {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(212,175,106,0.45);
+  background: rgba(212,175,106,0.08);
+  color: var(--text);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.logo-tile:hover .logo-tile-pill {
+  background: rgba(212,175,106,0.18);
+  border-color: var(--gold);
+}
+@keyframes logoGloss {
+  0%   { left: -75%; }
+  60%  { left: 125%; }
+  100% { left: 125%; }
+}
+@media (max-width: 720px) {
+  .logo-tiles { grid-template-columns: 1fr; gap: 1.75rem; padding: 0 1.25rem; }
+  .logo-tile-frame { aspect-ratio: 4/3; padding: 1.75rem; }
+}
+
 /* --- Big numbers band --- */
 .numbers-band {
   padding: clamp(5rem, 9vw, 8rem) 0;
