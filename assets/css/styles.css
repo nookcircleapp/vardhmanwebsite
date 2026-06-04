@@ -1455,7 +1455,12 @@ section { position: relative; }
   font-size: 1.05rem;
   letter-spacing: -0.005em;
   font-weight: 400;
+  white-space: nowrap;
+  max-width: 100%;
   transition: background 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
+}
+@media (max-width: 480px) {
+  .logo-tile-pill { font-size: 0.85rem; padding: 0.5rem 1rem; }
 }
 .logo-tile-status {
   position: absolute;
