@@ -1420,8 +1420,8 @@ section { position: relative; }
   transition: border-color 0.45s var(--ease), transform 0.45s var(--ease);
 }
 .logo-tile-frame img {
-  max-width: 75%;
-  max-height: 80%;
+  max-width: 92%;
+  max-height: 92%;
   width: auto;
   height: auto;
   object-fit: contain;
