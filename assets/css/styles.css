@@ -2635,6 +2635,31 @@ body.lightbox-open { overflow: hidden; }
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
+/* Horizontal-scroll variant (combined with .rail) */
+.legacy-grid.rail {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding: 1rem var(--gutter) 2rem;
+  scroll-padding-left: var(--gutter);
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: stretch;
+  grid-template-columns: none;
+}
+.legacy-grid.rail::-webkit-scrollbar { display: none; }
+.legacy-grid.rail .legacy-card {
+  flex: 0 0 clamp(260px, 26vw, 340px);
+  scroll-snap-align: start;
+  min-width: 0;
+}
+@media (max-width: 720px) {
+  .legacy-grid.rail .legacy-card { flex: 0 0 82%; }
+}
 .legacy-card {
   display: flex;
   flex-direction: column;

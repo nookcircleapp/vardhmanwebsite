@@ -84,15 +84,22 @@
   </div>
 </section>
 
-<!-- COMPLETED PORTFOLIO — uniform card grid -->
-<section class="section section-canvas" style="position:relative;overflow:hidden">
+<!-- COMPLETED PORTFOLIO — horizontal card scroll -->
+<section class="section section-canvas" style="position:relative;overflow:hidden" data-rail>
   <span class="rail-head-deco" aria-hidden="true" style="z-index:0">nineteen.</span>
   <div class="container" style="position:relative;z-index:1">
-    <div class="section-head left" style="margin-bottom:3rem">
-      <div class="eyebrow reveal">Our Legacy · 1992 → 2025</div>
-      <h2 class="h-section reveal reveal-d1">Nineteen <span class="serif-accent">addresses</span>, written into Bhopal.</h2>
+    <div class="section-head left" style="margin-bottom:3rem;display:grid;grid-template-columns:1fr auto;align-items:end;gap:1.5rem">
+      <div>
+        <div class="eyebrow reveal">Our Legacy · 1992 → 2025</div>
+        <h2 class="h-section reveal reveal-d1">Nineteen <span class="serif-accent">addresses</span>, written into Bhopal.</h2>
+      </div>
+      <div class="rail-controls">
+        <button class="rail-btn" data-rail-prev aria-label="Previous">←</button>
+        <button class="rail-btn" data-rail-next aria-label="Next">→</button>
+      </div>
     </div>
-    <div class="legacy-grid">
+  </div>
+  <div class="legacy-grid rail" data-rail-target>
       <div class="legacy-card reveal">
         <div class="eyebrow">1992 · Residential</div>
         <h3>Pulkit Apartments</h3>
@@ -193,7 +200,6 @@
         <span class="legacy-card-arrow">Discover Celestia →</span>
       </a>
     </div>
-  </div>
 </section>
 
 <!-- CTA -->
