@@ -673,6 +673,9 @@ section { position: relative; }
   letter-spacing: 0;
 }
 .footer-about p { color: var(--text-muted); max-width: 320px; line-height: 1.55; }
+.footer-about { text-align: left; }
+.footer-brand { display: block; text-align: left; }
+.footer-brand img { display: block; margin-left: -8px; }
 .footer h5 {
   font-size: 0.85rem;
   font-weight: 500;
@@ -1442,15 +1445,17 @@ section { position: relative; }
 .logo-tile:hover .logo-tile-frame { border-color: rgba(212,175,106,0.55); transform: translateY(-4px); }
 .logo-tile-pill {
   display: inline-block;
-  padding: 0.6rem 1.25rem;
+  padding: 0.6rem 1.4rem;
   border-radius: 999px;
   border: 1px solid rgba(212,175,106,0.45);
   background: rgba(212,175,106,0.08);
-  color: var(--text);
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
-  font-weight: 500;
-  transition: background 0.35s var(--ease), border-color 0.35s var(--ease);
+  color: var(--gold-bright);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  letter-spacing: -0.005em;
+  font-weight: 400;
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
 }
 .logo-tile:hover .logo-tile-pill {
   background: rgba(212,175,106,0.18);
