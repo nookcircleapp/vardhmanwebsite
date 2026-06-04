@@ -2698,6 +2698,141 @@ body.lightbox-open { overflow: hidden; }
 }
 
 /* ============================================
+   VERTICAL TIMELINE — chronological project list
+   ============================================ */
+.vlist-section {
+  padding: clamp(5rem, 9vw, 8rem) 0;
+  background: var(--canvas);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--hairline);
+}
+.vlist-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 85% 10%, rgba(212,175,106,0.06), transparent 60%);
+  pointer-events: none;
+}
+.vlist-head {
+  max-width: var(--max-wide);
+  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+  padding: 0 var(--gutter);
+  position: relative;
+  z-index: 1;
+}
+.vlist-head .eyebrow { margin-bottom: 1rem; }
+.vlist-head h2 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: -0.035em;
+  max-width: 18ch;
+  margin: 0;
+  color: var(--text);
+}
+
+.vlist {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  list-style: none;
+  position: relative;
+  z-index: 1;
+  counter-reset: vlist;
+}
+.vlist::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--gutter) + 130px);
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 1px;
+  background: var(--hairline);
+  pointer-events: none;
+}
+.vlist-item {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--hairline);
+  align-items: baseline;
+  position: relative;
+  transition: padding-left 0.4s var(--ease), background-color 0.4s var(--ease);
+}
+.vlist-item:first-child { border-top: 1px solid var(--hairline); }
+.vlist-item::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--gutter) + 130px);
+  top: 1.85rem;
+  width: 11px;
+  height: 11px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 2px solid var(--canvas);
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: 0 0 0 0 rgba(212,175,106,0.4);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.vlist-item:hover { background: rgba(212,175,106,0.04); padding-left: 1.25rem; }
+.vlist-item:hover::after { transform: translateX(-50%) scale(1.35); box-shadow: 0 0 0 6px rgba(212,175,106,0.15); }
+.vlist-year {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.35rem;
+  color: var(--gold);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  padding-top: 0.1rem;
+}
+.vlist-body .eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.vlist-body h3 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.25;
+  transition: color 0.3s var(--ease);
+}
+.vlist-item:hover .vlist-body h3 { color: var(--gold-bright); }
+.vlist-tag {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  background: var(--gold);
+  color: var(--ink);
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+a.vlist-item {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+@media (max-width: 720px) {
+  .vlist-item { grid-template-columns: 70px 1fr; gap: 1.5rem; padding: 1.4rem 0; }
+  .vlist::before { left: calc(var(--gutter) + 70px); }
+  .vlist-item::after { left: calc(var(--gutter) + 70px); width: 9px; height: 9px; top: 1.6rem; }
+  .vlist-item:hover { padding-left: 0.5rem; }
+  .vlist-year { font-size: 1rem; }
+  .vlist-body h3 { font-size: 1.05rem; }
+  .vlist-body .eyebrow { font-size: 0.62rem; margin-bottom: 0.35rem; }
+}
+
+/* ============================================
    LEGACY LIST — editorial portfolio index
    ============================================ */
 .legacy-list {
