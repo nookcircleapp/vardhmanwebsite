@@ -1395,6 +1395,52 @@ section { position: relative; }
 .cinematic.light .cinematic-card.right { margin-left: auto; }
 .cinematic.right .cinematic-card { margin-left: auto; }
 
+/* --- Logo mark section (centered framed logo with gloss) --- */
+.logo-mark-section {
+  padding: clamp(4rem, 7vw, 6rem) var(--gutter);
+  background: var(--black);
+  display: flex;
+  justify-content: center;
+}
+.logo-mark-inner {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16/9;
+  border: 1px solid var(--gold);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(212,175,106,0.05));
+  box-shadow: 0 0 0 6px rgba(212,175,106,0.12), 0 40px 90px -30px rgba(0,0,0,0.75);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 4vw, 3.5rem);
+}
+.logo-mark-inner img {
+  max-width: 78%;
+  max-height: 82%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+}
+.logo-mark-gloss {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.05) 35%, rgba(212,175,106,0.35) 50%, rgba(255,255,255,0.05) 65%, transparent 100%);
+  transform: skewX(-20deg);
+  animation: logoGloss 4.5s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+@media (max-width: 720px) {
+  .logo-mark-inner { aspect-ratio: 4/3; padding: 1.75rem; }
+}
+
 /* --- Logo tiles (Projects: current chapter) --- */
 .logo-tiles {
   display: grid;
