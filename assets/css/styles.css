@@ -1457,6 +1457,38 @@ section { position: relative; }
   font-weight: 400;
   transition: background 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
 }
+.logo-tile-status {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(11,11,11,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(212,175,106,0.55);
+  color: var(--gold-bright);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.logo-tile-status::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  animation: pulseDot 2s ease-out infinite;
+}
+@media (max-width: 720px) {
+  .logo-tile-status { top: 0.75rem; right: 0.75rem; padding: 0.3rem 0.7rem; font-size: 0.55rem; letter-spacing: 0.1em; }
+}
 .logo-tile:hover .logo-tile-pill {
   background: rgba(212,175,106,0.18);
   border-color: var(--gold);
