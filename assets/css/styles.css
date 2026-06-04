@@ -1416,11 +1416,13 @@ section { position: relative; }
   align-items: center;
   justify-content: center;
   padding: clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
 }
 .logo-mark-figure {
   position: relative;
-  display: inline-flex;
+  display: inline-block;
   line-height: 0;
+  margin: 0 auto;
 }
 .logo-mark-figure img { display: block; }
 .logo-mark-shine {
