@@ -2697,6 +2697,49 @@ body.lightbox-open { overflow: hidden; }
   .legacy-card p { font-size: 0.9rem; }
 }
 
+/* Link cards (Fairmont, Celestia) */
+.legacy-card--link {
+  text-decoration: none;
+  color: inherit;
+  border-color: rgba(212,175,106,0.3);
+  background: linear-gradient(180deg, rgba(212,175,106,0.04) 0%, rgba(212,175,106,0.08) 100%);
+}
+.legacy-card--link:hover {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, rgba(212,175,106,0.08) 0%, rgba(212,175,106,0.14) 100%);
+}
+.legacy-card-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.7rem;
+  background: var(--gold);
+  color: var(--ink);
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  margin-bottom: 0.3rem;
+}
+.legacy-card-pill::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--ink);
+  border-radius: 50%;
+  animation: pulseDot 2s ease-out infinite;
+}
+.legacy-card-arrow {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  transition: gap 0.3s var(--ease), color 0.3s var(--ease);
+}
+.legacy-card--link:hover .legacy-card-arrow { color: var(--gold-bright); letter-spacing: 0.04em; }
+
 /* ============================================
    VERTICAL TIMELINE — chronological project list
    ============================================ */
