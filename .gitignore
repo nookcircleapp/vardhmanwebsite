@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build / temp
+*.log
+.cache/
+dist/
+build/
+
+# One-off generator scripts (we delete these but ignore as a safety net)
+_gen_*.js
+_swap*.js
+_strip*.js
+_replace*.js
