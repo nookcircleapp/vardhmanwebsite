@@ -1395,6 +1395,12 @@ section { position: relative; }
 .cinematic.light .cinematic-card.right { margin-left: auto; }
 .cinematic.right .cinematic-card { margin-left: auto; }
 
+/* --- Contact form submit button --- */
+.contact-submit-btn { justify-self: start; }
+@media (max-width: 720px) {
+  .contact-submit-btn { width: 100%; justify-self: stretch; justify-content: center; text-align: center; }
+}
+
 /* --- Logo mark section (centered framed logo with gloss) --- */
 .logo-mark-section {
   padding: clamp(4rem, 7vw, 6rem) var(--gutter);
