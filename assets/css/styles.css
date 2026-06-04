@@ -261,7 +261,7 @@ section { position: relative; }
 
 @media (max-width: 820px) {
   .nav-toggle { display: block; }
-  .nav-links, .nav-cta {
+  .nav-links {
     position: fixed;
     top: 0; right: 0;
     height: 100vh;
@@ -270,11 +270,28 @@ section { position: relative; }
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
-    padding: 3rem;
+    padding: 4rem 3rem 8rem;
     transform: translateX(100%);
     transition: transform 0.45s var(--ease);
+    z-index: 101;
   }
-  .nav-cta { position: fixed; bottom: 2.5rem; right: 2.5rem; top: auto; height: auto; width: auto; transform: translateX(150%); }
+  .nav-cta {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    background: var(--gold);
+    color: var(--ink);
+    border: 1px solid var(--gold);
+    padding: 0.85rem 1.6rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 999px;
+    transform: translateX(150%);
+    transition: transform 0.45s var(--ease) 0.1s;
+    z-index: 103;
+    box-shadow: 0 12px 30px -8px rgba(212,175,106,0.4);
+  }
+  .nav-cta:hover { background: var(--gold-bright); }
   .nav-links a { font-size: 1.6rem; font-weight: 500; color: var(--text); opacity: 1; }
   .nav-open .nav-links, .nav-open .nav-cta { transform: translateX(0); }
   .nav-open { overflow: hidden; }
@@ -1332,6 +1349,25 @@ section { position: relative; }
 .cinematic-card .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
 .cinematic-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
+@media (max-width: 720px) {
+  .cinematic-card,
+  .cinematic.right .cinematic-card,
+  .cinematic.light .cinematic-card.right {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    max-width: calc(100% - 2.5rem);
+  }
+  .cinematic-actions { flex-direction: column; align-items: stretch; }
+  .cinematic-actions .btn { width: 100%; text-align: center; justify-content: center; }
+
+  .tile,
+  .legacy-card,
+  .number-cell,
+  .reel-shell,
+  .cta-card-inner,
+  .contact-info-block { margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+
 /* Celestia — gold-trimmed elevated dark card on warm canvas */
 .cinematic.light { background: var(--canvas); }
 .cinematic.light .cinematic-bg img { filter: brightness(0.85) contrast(1.05); }
@@ -1531,7 +1567,7 @@ section { position: relative; }
 .editorial-text .meta-row strong { font-size: 1.05rem; font-weight: 600; color: var(--text); letter-spacing: -0.015em; }
 @media (max-width: 820px) {
   .editorial-grid { grid-template-columns: 1fr; }
-  .editorial-image { position: relative; top: 0; aspect-ratio: 16/10; }
+  .editorial-image { position: relative; top: 0; aspect-ratio: 4/3; }
 }
 
 /* --- Horizontal scrolling rail (editorial, indexed) --- */
@@ -2290,11 +2326,11 @@ body.lightbox-open { overflow: hidden; }
 @media (max-width: 720px) {
   .photo-rail-head { grid-template-columns: 1fr; }
   .photo-rail-controls { justify-content: flex-start; }
-  .photo-rail { gap: 0.6rem; }
-  .photo-card { flex: 0 0 calc((100% - 1.6rem) / 3); border-radius: 14px; }
-  .photo-card-num { font-size: 1.2rem; top: 0.5rem; right: 0.55rem; }
-  .photo-card-label { font-size: 0.55rem; bottom: 0.5rem; left: 0.5rem; right: 0.5rem; letter-spacing: 0.06em; }
-  .photo-card-label .expand { width: 22px; height: 22px; font-size: 0.6rem; }
+  .photo-rail { gap: 1rem; }
+  .photo-card { flex: 0 0 100%; max-width: 100%; border-radius: 20px; }
+  .photo-card-num { font-size: 2rem; top: 1rem; right: 1rem; }
+  .photo-card-label { font-size: 0.78rem; bottom: 1rem; left: 1rem; right: 1rem; letter-spacing: 0.1em; }
+  .photo-card-label .expand { width: 32px; height: 32px; font-size: 0.85rem; }
   .lightbox-close { top: 1rem; right: 1rem; }
   .lightbox-prev { left: 0.5rem; }
   .lightbox-next { right: 0.5rem; }
