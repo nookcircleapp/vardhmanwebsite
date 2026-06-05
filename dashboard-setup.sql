@@ -47,8 +47,8 @@ create policy "authenticated_read_enquiries"
   to authenticated
   using (
     auth.jwt() ->> 'email' = 'admin@vardhman.com'
-    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and (project ilike '%fairmont%' or project ilike '%ebook%'))
-    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and (project ilike '%celestia%' or project ilike '%ebook%'))
+    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and project ilike '%fairmont%')
+    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and project ilike '%celestia%')
   );
 
 -- Update / delete inherit the same scope (saif can't touch celestia rows etc.)
@@ -57,13 +57,13 @@ create policy "authenticated_update_enquiries"
   to authenticated
   using (
     auth.jwt() ->> 'email' = 'admin@vardhman.com'
-    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and (project ilike '%fairmont%' or project ilike '%ebook%'))
-    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and (project ilike '%celestia%' or project ilike '%ebook%'))
+    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and project ilike '%fairmont%')
+    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and project ilike '%celestia%')
   )
   with check (
     auth.jwt() ->> 'email' = 'admin@vardhman.com'
-    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and (project ilike '%fairmont%' or project ilike '%ebook%'))
-    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and (project ilike '%celestia%' or project ilike '%ebook%'))
+    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and project ilike '%fairmont%')
+    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and project ilike '%celestia%')
   );
 
 create policy "authenticated_delete_enquiries"
@@ -71,8 +71,8 @@ create policy "authenticated_delete_enquiries"
   to authenticated
   using (
     auth.jwt() ->> 'email' = 'admin@vardhman.com'
-    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and (project ilike '%fairmont%' or project ilike '%ebook%'))
-    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and (project ilike '%celestia%' or project ilike '%ebook%'))
+    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and project ilike '%fairmont%')
+    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and project ilike '%celestia%')
   );
 
 -- 3. Enable Realtime so dashboard updates live as new enquiries arrive
