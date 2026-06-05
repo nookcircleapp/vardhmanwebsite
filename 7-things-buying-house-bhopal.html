@@ -348,26 +348,26 @@
     }).then(function (res) {
       if (!res.ok) { return res.text().then(function (t) { throw new Error(t || ('HTTP ' + res.status)); }); }
       form.reset();
-      setStatus('Downloading your ebook…', 'ok');
-      // Force immediate download (bypasses popup blockers, no new tab)
+      setStatus('Preparing your ebook…', 'ok');
       var pdfUrl = 'https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/7%20Things%20to%20consider%20before%20buying%20a%20house%20in%20Bhopal.pdf';
-      fetch(pdfUrl).then(function (r) { return r.blob(); }).then(function (blob) {
+      var filename = '7-things-buying-a-house-in-bhopal.pdf';
+      // Try blob download first (works when R2 sends CORS headers)
+      fetch(pdfUrl, { mode: 'cors' }).then(function (r) {
+        if (!r.ok) throw new Error('fetch failed');
+        return r.blob();
+      }).then(function (blob) {
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = '7 Things to consider before buying a house in Bhopal.pdf';
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
-        setTimeout(function () { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+        setTimeout(function () { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+        setStatus('Downloaded — check your downloads folder.', 'ok');
       }).catch(function () {
-        // Fallback: direct link click
-        var a = document.createElement('a');
-        a.href = pdfUrl;
-        a.download = '7 Things to consider before buying a house in Bhopal.pdf';
-        a.rel = 'noopener';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        // CORS-blocked or fetch failed — fall back to opening the PDF
+        setStatus('Opening your ebook in a new tab…', 'ok');
+        window.open(pdfUrl, '_blank', 'noopener');
       });
     }).catch(function (err) {
       console.error('Ebook submit failed', err);
