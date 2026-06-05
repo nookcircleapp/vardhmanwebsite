@@ -1659,9 +1659,11 @@ section { position: relative; }
   position: relative;
 }
 .ebook-card-img-contain {
-  background-size: 65%;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   background-color: var(--black);
+  padding: 1.25rem;
 }
 .ebook-card-img-contain::after { display: none; }
 .ebook-card-img::after {
