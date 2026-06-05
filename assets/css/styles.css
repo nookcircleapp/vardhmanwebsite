@@ -1412,6 +1412,85 @@ section { position: relative; }
 .cinematic.right .cinematic-card { margin-left: auto; }
 
 /* ============================================
+   HOME EBOOK TEASER
+   ============================================ */
+.home-ebook {
+  padding: clamp(5rem, 9vw, 8rem) var(--gutter);
+  background: var(--paper);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.home-ebook-inner {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+.home-ebook-text .eyebrow { color: var(--gold); margin-bottom: 1rem; font-size: 0.85rem; letter-spacing: 0.16em; text-transform: uppercase; }
+.home-ebook-text h2 { font-size: clamp(1.85rem, 3.6vw, 2.75rem); letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 1.25rem; }
+.home-ebook-text p { color: var(--text-muted); font-size: 1.02rem; line-height: 1.6; max-width: 540px; margin: 0 0 2rem; }
+.home-ebook-actions { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+
+.home-ebook-cover {
+  display: flex;
+  justify-content: center;
+  perspective: 1100px;
+  text-decoration: none;
+}
+.home-ebook-cover-card {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 3/4.2;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #fbe6d4 0%, #f4d4be 35%, #e8b6a0 70%, #d59ab3 100%);
+  box-shadow: 0 30px 70px -25px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,106,0.35);
+  overflow: hidden;
+  transform: rotate(-3deg);
+  transition: transform 0.5s var(--ease);
+}
+.home-ebook-cover:hover .home-ebook-cover-card { transform: rotate(0deg) translateY(-4px); }
+.home-ebook-spine {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 12px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(0,0,0,0));
+}
+.home-ebook-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(36px); opacity: 0.85; pointer-events: none;
+}
+.home-ebook-blob.a { width: 55%; aspect-ratio: 1; background: #ff9aa2; top: -10%; left: -10%; }
+.home-ebook-blob.b { width: 50%; aspect-ratio: 1; background: #ffb37e; top: -15%; right: -15%; }
+.home-ebook-blob.c { width: 35%; aspect-ratio: 1; background: #d18ad1; top: 10%; left: 35%; opacity: 0.6; }
+.home-ebook-cover-content {
+  position: absolute; inset: 0;
+  padding: 1.5rem 1.4rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: #2a1a1a;
+}
+.home-ebook-eyebrow { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: rgba(60,30,20,0.7); }
+.home-ebook-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.3rem, 2.8vw, 1.85rem);
+  line-height: 1.05; letter-spacing: -0.03em;
+  color: #1a1a1a; margin: 0;
+}
+.home-ebook-title em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+.home-ebook-title span { background: rgba(255,243,220,0.7); padding: 0 0.3rem; }
+.home-ebook-foot {
+  display: flex; justify-content: space-between;
+  font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(60,30,20,0.65); font-weight: 600;
+}
+@media (max-width: 820px) {
+  .home-ebook-inner { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+  .home-ebook-text p { margin-left: auto; margin-right: auto; }
+  .home-ebook-actions { justify-content: center; }
+  .home-ebook-cover-card { max-width: 260px; }
+}
+
+/* ============================================
    EBOOK LANDING PAGE — 7 Things ebook
    ============================================ */
 
