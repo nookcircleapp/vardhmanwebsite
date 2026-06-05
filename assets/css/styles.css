@@ -3016,7 +3016,8 @@ img, video, picture, source {
     linear-gradient(180deg, rgba(255,255,255,0.025), rgba(212,175,106,0.015));
   display: flex;
   flex-direction: column;
-  height: 100%;
+  align-self: stretch;
+  min-height: 340px;
   position: relative;
   isolation: isolate;
   overflow: hidden;
