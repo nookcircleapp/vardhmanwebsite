@@ -1439,6 +1439,17 @@ section { position: relative; }
   perspective: 1100px;
   text-decoration: none;
 }
+.home-ebook-cover img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  transform: rotate(-3deg);
+  transition: transform 0.5s var(--ease);
+  box-shadow: 0 30px 70px -25px rgba(0,0,0,0.5);
+}
+.home-ebook-cover:hover img { transform: rotate(0deg) translateY(-4px); }
 .home-ebook-cover-card {
   position: relative;
   width: 100%;
@@ -1526,6 +1537,20 @@ section { position: relative; }
   display: flex;
   justify-content: center;
   perspective: 1200px;
+}
+.ebook-cover > img {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+  transform: rotate(-3deg);
+  transition: transform 0.6s var(--ease);
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,0.7);
+}
+.ebook-cover:hover > img { transform: rotate(0deg) translateY(-4px); }
+@media (max-width: 880px) {
+  .ebook-cover > img { max-width: 320px; }
 }
 .ebook-cover-card {
   position: relative;
