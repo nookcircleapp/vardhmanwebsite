@@ -204,14 +204,14 @@
 
   // Rail scroll controls + progress + dots
   document.querySelectorAll('[data-rail]').forEach(group => {
-    const rail = group.querySelector('.rail, .photo-rail');
+    const rail = group.querySelector('.rail, .photo-rail, .testimonials-rail');
     const prev = group.querySelector('[data-rail-prev]');
     const next = group.querySelector('[data-rail-next]');
     const fill = group.querySelector('[data-rail-fill]');
     const current = group.querySelector('[data-rail-current]');
     const dotsBox = group.querySelector('[data-rail-dots]');
     if (!rail) return;
-    const cards = rail.querySelectorAll('.rail-card, .photo-card');
+    const cards = rail.querySelectorAll('.rail-card, .photo-card, .testimonial');
     const total = cards.length;
     const step = () => Math.min(rail.clientWidth * 0.8, 500);
     prev?.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
