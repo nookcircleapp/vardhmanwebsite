@@ -1231,8 +1231,10 @@ section { position: relative; }
 }
 @media (max-width: 720px) {
   .hero-edit { min-height: 90vh; padding-top: 7rem; }
-  .hero-edit-meta { flex-direction: column; align-items: flex-start; }
+  .hero-edit-meta { flex-direction: column; align-items: stretch; }
   .hero-edit-corner { display: none; }
+  .hero-edit-meta-right { width: 100%; flex-direction: column; align-items: stretch; gap: 0.75rem; }
+  .hero-edit-meta-right .btn { width: 100%; justify-content: center; }
 }
 
 /* --- Ticker strip --- */
