@@ -361,8 +361,27 @@
     }).then(function (res) {
       if (!res.ok) { return res.text().then(function (t) { throw new Error(t || ('HTTP ' + res.status)); }); }
       form.reset();
-      setStatus('Opening your ebook now…', 'ok');
-      window.open('https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/7%20Things%20to%20consider%20before%20buying%20a%20house%20in%20Bhopal.pdf', '_blank', 'noopener');
+      setStatus('Downloading your ebook…', 'ok');
+      // Force immediate download (bypasses popup blockers, no new tab)
+      var pdfUrl = 'https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/7%20Things%20to%20consider%20before%20buying%20a%20house%20in%20Bhopal.pdf';
+      fetch(pdfUrl).then(function (r) { return r.blob(); }).then(function (blob) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = '7 Things to consider before buying a house in Bhopal.pdf';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+      }).catch(function () {
+        // Fallback: direct link click
+        var a = document.createElement('a');
+        a.href = pdfUrl;
+        a.download = '7 Things to consider before buying a house in Bhopal.pdf';
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
     }).catch(function (err) {
       console.error('Ebook submit failed', err);
       setStatus('Sorry — could not send. Please call us on +91 88713 39894.', 'err');
