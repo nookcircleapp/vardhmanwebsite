@@ -2943,6 +2943,7 @@ img, video, picture, source {
 }
 .testimonials-rail {
   display: flex;
+  align-items: stretch;
   gap: clamp(1.25rem, 2vw, 1.75rem);
   overflow-x: auto;
   overscroll-behavior-x: contain;
