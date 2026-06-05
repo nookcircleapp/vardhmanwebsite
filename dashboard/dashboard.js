@@ -16,8 +16,6 @@ const loginBtn    = document.getElementById('loginBtn');
 const whoami      = document.getElementById('whoami');
 const enqListEl    = document.getElementById('enqList');
 const enqCountEl   = document.getElementById('enqCount');
-const ebookListEl  = document.getElementById('ebookList');
-const ebookCountEl = document.getElementById('ebookCount');
 const liveNEl     = document.getElementById('liveN');
 const liveSEl     = document.getElementById('liveS');
 const liveRowsEl  = document.getElementById('liveRows');
@@ -57,30 +55,23 @@ function showApp(user) {
   bootApp();
 }
 
-// Hide filter chips + ebook section the signed-in user has no access to.
+// Hide filter chips the signed-in user has no access to.
 function applyRoleScope(email) {
   const e = (email || '').toLowerCase();
-  const allowed = { fairmont: false, 'celestia-2': false, 'celestia-3': false, 'celestia-4': false };
-  let canSeeEbook = false;
+  const allowed = { fairmont: false, 'celestia-2': false, 'celestia-3': false, 'celestia-4': false, ebook: false };
   if (e === 'admin@vardhman.com') {
-    allowed.fairmont = allowed['celestia-2'] = allowed['celestia-3'] = allowed['celestia-4'] = true;
-    canSeeEbook = true;
+    allowed.fairmont = allowed['celestia-2'] = allowed['celestia-3'] = allowed['celestia-4'] = allowed.ebook = true;
   } else if (e === 'saif@vardhman.com') {
     allowed.fairmont = true;
   } else if (e === 'sudhanshu@vardhman.com') {
     allowed['celestia-2'] = allowed['celestia-3'] = allowed['celestia-4'] = true;
   } else {
-    allowed.fairmont = allowed['celestia-2'] = allowed['celestia-3'] = allowed['celestia-4'] = true;
+    allowed.fairmont = allowed['celestia-2'] = allowed['celestia-3'] = allowed['celestia-4'] = allowed.ebook = true;
   }
   document.querySelectorAll('#projectFilter button').forEach(b => {
     const key = b.dataset.p;
     if (key !== 'all' && !allowed[key]) b.style.display = 'none';
   });
-  if (!canSeeEbook) {
-    if (ebookListEl) ebookListEl.style.display = 'none';
-    const ebookHead = ebookCountEl && ebookCountEl.closest('.section-head');
-    if (ebookHead) ebookHead.style.display = 'none';
-  }
 }
 
 loginForm.addEventListener('submit', async (e) => {
@@ -156,16 +147,13 @@ function subscribeEnquiries() {
 }
 
 function renderEnquiries() {
-  // Property enquiries only (exclude ebook from main list)
-  const propertyRows = allEnquiries.filter(r => !isEbook(r));
-  const rows = propertyRows.filter(r => {
+  const rows = allEnquiries.filter(r => {
     const sOk = statusFilter === 'all' || (r.status || 'new') === statusFilter;
     const pOk = projectFilter === 'all' || projectKey(r.project) === projectFilter;
     return sOk && pOk;
   });
   enqCountEl.textContent = rows.length;
   updateFilterBadges();
-  renderEbookDownloads();
   enqListEl.replaceChildren();
 
   if (rows.length === 0) {
@@ -270,10 +258,9 @@ document.querySelectorAll('#projectFilter button').forEach(b => {
 });
 
 function updateFilterBadges() {
-  const propertyRows = allEnquiries.filter(r => !isEbook(r));
-  const statusCounts = { all: propertyRows.length, new: 0, contacted: 0, closed: 0 };
-  const projectCounts = { all: propertyRows.length, 'fairmont': 0, 'celestia-2': 0, 'celestia-3': 0, 'celestia-4': 0 };
-  propertyRows.forEach(r => {
+  const statusCounts = { all: allEnquiries.length, new: 0, contacted: 0, closed: 0 };
+  const projectCounts = { all: allEnquiries.length, 'fairmont': 0, 'celestia-2': 0, 'celestia-3': 0, 'celestia-4': 0, 'ebook': 0 };
+  allEnquiries.forEach(r => {
     const s = r.status || 'new';
     if (statusCounts[s] !== undefined) statusCounts[s]++;
     const p = projectKey(r.project);
@@ -283,56 +270,6 @@ function updateFilterBadges() {
   document.querySelectorAll('#projectFilter button').forEach(b => setBadge(b, projectCounts[b.dataset.p]));
 }
 
-function renderEbookDownloads() {
-  const rows = allEnquiries.filter(isEbook);
-  ebookCountEl.textContent = rows.length;
-  ebookListEl.replaceChildren();
-
-  if (rows.length === 0) {
-    ebookListEl.appendChild(makeEmpty('No ebook downloads yet', 'Visitors who request the ebook will appear here.'));
-    return;
-  }
-
-  const head = el('div', 'enq-row ebook-row head');
-  ['#','Name','Email','Phone','Received',''].forEach(t => head.appendChild(el('div', '', t)));
-  ebookListEl.appendChild(head);
-
-  rows.forEach(r => {
-    const row = el('div', 'enq-row ebook-row');
-    row.appendChild(el('div', 'seq', '#' + (r._seq || '?')));
-    row.appendChild(el('div', 'name', r.name || '—'));
-    row.appendChild(el('div', 'email', r.email || '—'));
-    row.appendChild(el('div', 'phone', r.phone || '—'));
-    const time = el('div', 'time', formatTime(r.created_at));
-    time.title = r.created_at || '';
-    row.appendChild(time);
-
-    const delWrap = document.createElement('div');
-    const delBtn = document.createElement('button');
-    delBtn.className = 'del-btn';
-    delBtn.title = 'Delete download record';
-    delBtn.textContent = '×';
-    delBtn.addEventListener('click', async (ev) => {
-      ev.stopPropagation();
-      if (!delBtn.classList.contains('confirm')) {
-        delBtn.classList.add('confirm');
-        delBtn.textContent = 'Confirm';
-        setTimeout(() => { delBtn.classList.remove('confirm'); delBtn.textContent = '×'; }, 4000);
-        return;
-      }
-      delBtn.disabled = true;
-      const { error } = await sb.from('enquiries').delete().eq('id', r.id);
-      if (error) { delBtn.disabled = false; delBtn.classList.remove('confirm'); delBtn.textContent = '×'; alert('Could not delete: ' + error.message); return; }
-      allEnquiries = allEnquiries.filter(x => x.id !== r.id);
-      assignSequenceNumbers();
-      renderEnquiries();
-    });
-    delWrap.appendChild(delBtn);
-    row.appendChild(delWrap);
-
-    ebookListEl.appendChild(row);
-  });
-}
 function setBadge(btn, n) {
   let badge = btn.querySelector('.badge');
   if (!badge) {
