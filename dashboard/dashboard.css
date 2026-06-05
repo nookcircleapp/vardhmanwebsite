@@ -20,6 +20,7 @@ a{color:var(--gold);text-decoration:none}
 .login-card button:disabled{opacity:.5;cursor:not-allowed}
 .login-err{color:var(--danger);font-size:.85rem;margin-top:.75rem;min-height:1.2em}
 .login-brand{text-align:center;color:var(--gold);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;margin-bottom:2rem}
+.login-logo{display:block;height:64px;width:auto;margin:0 auto 2rem;filter:brightness(1.05)}
 
 /* APP */
 .app{display:none}
