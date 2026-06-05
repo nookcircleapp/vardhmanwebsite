@@ -1630,8 +1630,15 @@ section { position: relative; }
   height: 200px;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   position: relative;
 }
+.ebook-card-img-contain {
+  background-size: 65%;
+  background-position: center;
+  background-color: var(--black);
+}
+.ebook-card-img-contain::after { display: none; }
 .ebook-card-img::after {
   content: '';
   position: absolute; inset: 0;
