@@ -207,3 +207,30 @@
     if (path.startsWith('vardhman') && href === 'projects.html') a.classList.add('active');
   });
 })();
+
+// --- LIVE PRESENCE TRACKING (broadcasts this visitor to the dashboard) ---
+(function loadPresence() {
+  if (window.location.pathname.indexOf('/dashboard') === 0) return; // dashboard tracks itself separately
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+  s.onload = function () {
+    try {
+      var SUPABASE_URL = 'https://ojxtrnxpqvrysvxipaea.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qeHRybnhwcXZyeXN2eGlwYWVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NzE0MzMsImV4cCI6MjA5NjE0NzQzM30.4OLm_vG0auBfpiULta_y3xllGdFNJYRsC6wqyoINPFg';
+      var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      var visitorId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'v_' + Math.random().toString(36).slice(2) + Date.now();
+      var channel = client.channel('online_users', { config: { presence: { key: visitorId } } });
+      channel.subscribe(async function (status) {
+        if (status === 'SUBSCRIBED') {
+          await channel.track({
+            page: window.location.pathname + window.location.search,
+            title: document.title,
+            joined_at: new Date().toISOString()
+          });
+        }
+      });
+      window.addEventListener('beforeunload', function () { try { channel.untrack(); } catch (e) {} });
+    } catch (err) { /* presence is non-critical */ }
+  };
+  document.head.appendChild(s);
+})();

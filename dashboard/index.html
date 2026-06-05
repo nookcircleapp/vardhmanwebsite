@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Vardhman Dashboard</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<!-- LOGIN VIEW -->
+<div id="loginView" class="login-wrap">
+  <div class="login-card">
+    <div class="login-brand">Vardhman Constructions</div>
+    <h1>Sign in</h1>
+    <p class="sub">Dashboard access for the Vardhman team only.</p>
+    <form id="loginForm">
+      <label for="lEmail">Email</label>
+      <input type="email" id="lEmail" required autocomplete="username" />
+      <label for="lPass">Password</label>
+      <input type="password" id="lPass" required autocomplete="current-password" />
+      <button type="submit" id="loginBtn">Sign in</button>
+      <div class="login-err" id="loginErr"></div>
+    </form>
+  </div>
+</div>
+
+<!-- APP VIEW -->
+<div id="appView" class="app">
+  <div class="topbar">
+    <div class="brand"><small>Vardhman</small> Dashboard</div>
+    <div class="user">
+      <span id="whoami"></span>
+      <button class="signout" id="signOutBtn">Sign out</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- LIVE BAND -->
+    <div class="live">
+      <div class="live-count">
+        <span class="dot">Live now</span>
+        <div class="n" id="liveN">0</div>
+        <div class="label">visitor<span id="liveS">s</span> online right now</div>
+      </div>
+      <div class="live-list">
+        <table>
+          <thead>
+            <tr><th>Page</th><th>Title</th><th style="width:120px">On site</th></tr>
+          </thead>
+          <tbody id="liveRows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ENQUIRIES -->
+    <div class="section-head">
+      <h2>Enquiries <small id="enqCount">0</small></h2>
+      <div class="filter">
+        <button data-f="all" class="active">All</button>
+        <button data-f="new">New</button>
+        <button data-f="contacted">Contacted</button>
+        <button data-f="closed">Closed</button>
+      </div>
+    </div>
+
+    <div class="enq-list" id="enqList"></div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>
