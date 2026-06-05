@@ -121,11 +121,90 @@ a{color:var(--gold);text-decoration:none}
 .empty-state .big{font-size:1.65rem;color:var(--text);margin-bottom:.5rem;font-family:'Fraunces',serif;font-style:italic}
 
 @media (max-width: 980px){
-  .live{grid-template-columns:1fr;gap:1.25rem}
+  .live{grid-template-columns:1fr;gap:1rem;padding:1.25rem}
   .live-count{border-right:0;border-bottom:1px solid var(--line);padding-bottom:1rem}
-  .enq-row{grid-template-columns:1fr;gap:.5rem;padding:1.25rem}
+  .live-count .n{font-size:2.75rem}
   .enq-row.head{display:none}
-  .enq-row .status-sel{max-width:200px}
   html,body{font-size:15px}
   .section-head h2{font-size:1.2rem}
+}
+
+/* ===================== PHONE LAYOUT ===================== */
+@media (max-width: 720px){
+  html,body{font-size:14.5px}
+  .topbar{padding:.75rem 1rem;gap:.5rem}
+  .topbar .brand-logo{height:30px}
+  .topbar .brand-label{font-size:.85rem}
+  .topbar .brand-label small{font-size:.55rem;letter-spacing:.18em}
+  .topbar .user{gap:.5rem}
+  .topbar .user #whoami{display:none}   /* save space — email shows once you tap profile area */
+  .topbar .signout{padding:.45rem .7rem;font-size:.75rem}
+
+  .main{padding:1.25rem 1rem 3rem}
+
+  /* Live band */
+  .live{padding:1.1rem;gap:.85rem}
+  .live-count .n{font-size:2.5rem}
+  .live-count .dot{font-size:.7rem}
+  .live-count .label{font-size:.8rem}
+  .live-list{max-height:200px}
+  .live-list table th:nth-child(2),
+  .live-list table td:nth-child(2){display:none}   /* hide Title column — Page + Duration enough */
+  .live-list th,.live-list td{padding:.5rem .55rem;font-size:.78rem}
+
+  /* Section heads + filters */
+  .section-head{gap:.85rem;margin-bottom:.9rem}
+  .section-head h2{font-size:1.1rem}
+  .section-head h2 small{font-size:.85rem}
+  .filter-group{width:100%;gap:.4rem}
+  .filter-group .filter-label{font-size:.62rem}
+  .filter{gap:.35rem}
+  .filter button{padding:.4rem .75rem;font-size:.78rem;border-radius:18px}
+  .filter button .badge{font-size:.65rem;padding:.05rem .4rem;margin-left:.3rem}
+
+  /* Enquiry rows — card layout */
+  .enq-list{border-radius:12px}
+  .enq-row{
+    display:flex;
+    flex-direction:column;
+    gap:.6rem;
+    padding:1.1rem 1rem;
+  }
+  .enq-row .seq{
+    color:var(--gold);
+    font-weight:700;
+    font-size:.78rem;
+    letter-spacing:.05em;
+  }
+  .enq-row .name{font-size:1.05rem;font-weight:600;line-height:1.2}
+  .enq-row .email,
+  .enq-row .phone,
+  .enq-row .project,
+  .enq-row .time{font-size:.85rem;color:var(--muted)}
+  .enq-row .email::before{content:"📧  ";opacity:.6}
+  .enq-row .phone::before{content:"📞  ";opacity:.6}
+  .enq-row .project{color:var(--gold-soft);font-weight:500;padding-top:.15rem;border-top:1px dashed var(--line-2);margin-top:.25rem}
+  .enq-row .time{font-size:.75rem;letter-spacing:.04em}
+
+  .enq-row .status-sel{padding:.55rem .65rem;font-size:.82rem;width:100%}
+  .enq-row .del-btn{width:100%;height:38px}
+  .enq-row .del-btn.confirm{padding:0 .75rem;font-size:.72rem}
+
+  /* Message box — denser */
+  .enq-row .msg-box{
+    padding:.8rem .9rem;
+    margin-top:.55rem;
+    font-size:.92rem;
+    line-height:1.45;
+  }
+  .enq-row .msg-box::before{font-size:.6rem}
+}
+
+/* ===================== TINY PHONE ===================== */
+@media (max-width: 380px){
+  .topbar .brand-label small{display:none}
+  .topbar .brand-logo{height:26px}
+  .main{padding:1rem .75rem 3rem}
+  .live{padding:.95rem}
+  .live-count .n{font-size:2.15rem}
 }
