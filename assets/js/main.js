@@ -3,6 +3,16 @@
 (function () {
   'use strict';
 
+  // Haptic feedback on tappable elements (mobile only — Android Web Vibration API)
+  if ('vibrate' in navigator && matchMedia('(hover: none) and (pointer: coarse)').matches) {
+    var tapSelector = 'button, .btn, .nav-cta, .nav-toggle, .nav-links a, a.link, .logo-tile, .ebook-card, [data-haptic]';
+    document.addEventListener('pointerdown', function (e) {
+      var t = e.target.closest && e.target.closest(tapSelector);
+      if (!t || t.disabled) return;
+      try { navigator.vibrate(10); } catch (err) {}
+    }, { passive: true });
+  }
+
   const nav = document.querySelector('.nav');
   const navToggle = document.querySelector('.nav-toggle');
   const body = document.body;
