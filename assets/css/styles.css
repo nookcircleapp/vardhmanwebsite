@@ -1411,9 +1411,18 @@ section { position: relative; }
 
 /* --- Contact form submit button --- */
 .contact-submit-btn { justify-self: start; }
+.contact-submit-btn[disabled] { opacity: 0.6; cursor: progress; }
 @media (max-width: 720px) {
   .contact-submit-btn { width: 100%; justify-self: stretch; justify-content: center; text-align: center; }
 }
+.enquiry-status {
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  min-height: 1.2em;
+  color: var(--text-muted);
+}
+.enquiry-status[data-kind="ok"] { color: var(--gold); }
+.enquiry-status[data-kind="err"] { color: #e57373; }
 
 /* --- Logo mark section (centered framed logo with gloss) --- */
 .logo-mark-section {

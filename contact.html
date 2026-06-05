@@ -61,7 +61,7 @@
       <div class="reveal">
         <div class="eyebrow">Enquiry Form</div>
         <h2 class="h-medium" style="margin-top:0.75rem;margin-bottom:2.5rem">Send us a message.</h2>
-        <form class="contact-form">
+        <form class="contact-form" id="enquiryForm" novalidate>
           <div class="field-row">
             <div class="field"><label for="name">Full Name</label><input type="text" id="name" name="name" required></div>
             <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" required></div>
@@ -77,8 +77,71 @@
             </select>
           </div>
           <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Tell us what you're looking for…"></textarea></div>
-          <button type="submit" class="btn btn-primary contact-submit-btn">Send Enquiry <span class="arrow">→</span></button>
+          <button type="submit" class="btn btn-primary contact-submit-btn" id="enquirySubmitBtn"><span class="btn-label">Send Enquiry</span> <span class="arrow">→</span></button>
+          <div id="enquiryStatus" class="enquiry-status" role="status" aria-live="polite"></div>
         </form>
+
+        <script>
+        (function () {
+          var SUPABASE_URL = 'https://ojxtrnxpqvrysvxipaea.supabase.co';
+          var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qeHRybnhwcXZyeXN2eGlwYWVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NzE0MzMsImV4cCI6MjA5NjE0NzQzM30.4OLm_vG0auBfpiULta_y3xllGdFNJYRsC6wqyoINPFg';
+          var form = document.getElementById('enquiryForm');
+          var btn = document.getElementById('enquirySubmitBtn');
+          var status = document.getElementById('enquiryStatus');
+          if (!form) return;
+          var label = btn.querySelector('.btn-label');
+          var originalLabel = label ? label.textContent : 'Send Enquiry';
+
+          function setStatus(msg, kind) {
+            status.textContent = msg;
+            status.dataset.kind = kind || '';
+          }
+
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!form.checkValidity()) {
+              form.reportValidity();
+              return;
+            }
+            btn.disabled = true;
+            if (label) label.textContent = 'Sending…';
+            setStatus('', '');
+
+            var payload = {
+              name: form.name.value.trim(),
+              phone: form.phone.value.trim(),
+              email: form.email.value.trim(),
+              project: form.project.value,
+              message: form.message.value.trim() || null,
+              source_url: window.location.href,
+              user_agent: navigator.userAgent
+            };
+
+            fetch(SUPABASE_URL + '/rest/v1/enquiries', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                'Prefer': 'return=minimal'
+              },
+              body: JSON.stringify(payload)
+            }).then(function (res) {
+              if (!res.ok) {
+                return res.text().then(function (t) { throw new Error(t || ('HTTP ' + res.status)); });
+              }
+              form.reset();
+              setStatus('Thanks — we will get back to you within one business day.', 'ok');
+            }).catch(function (err) {
+              console.error('Enquiry submit failed', err);
+              setStatus('Sorry — could not send. Please call us or try again.', 'err');
+            }).then(function () {
+              btn.disabled = false;
+              if (label) label.textContent = originalLabel;
+            });
+          });
+        })();
+        </script>
       </div>
 
       <div class="reveal reveal-d1">
