@@ -62,7 +62,8 @@ a{color:var(--gold);text-decoration:none}
 .filter button.active .badge{background:var(--gold);color:#0a0a0a}
 
 .enq-list{background:var(--bg-2);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.enq-row{display:grid;grid-template-columns:1.3fr 1.5fr 1fr 1.6fr 0.9fr 110px;gap:1.25rem;padding:1.25rem 1.5rem;border-bottom:1px solid var(--line-2);align-items:start;font-size:.95rem}
+.enq-row{display:grid;grid-template-columns:55px 1.3fr 1.5fr 1fr 1.6fr 0.9fr 110px;gap:1.25rem;padding:1.25rem 1.5rem;border-bottom:1px solid var(--line-2);align-items:start;font-size:.95rem}
+.enq-row .seq{color:var(--gold);font-weight:600;font-size:1rem;font-variant-numeric:tabular-nums}
 .enq-row.head{background:#0a0a0a;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:500;align-items:center}
 .enq-row:last-child{border-bottom:0}
 .enq-row .name{font-weight:600;font-size:1rem;color:var(--text)}

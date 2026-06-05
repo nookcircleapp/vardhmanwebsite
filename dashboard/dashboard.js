@@ -92,13 +92,23 @@ async function loadEnquiries() {
     return;
   }
   allEnquiries = data || [];
+  assignSequenceNumbers();
   renderEnquiries();
+}
+
+// Oldest enquiry = #1, newest = #N (stable, lifetime numbering)
+function assignSequenceNumbers() {
+  const sorted = [...allEnquiries].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+  const seq = new Map();
+  sorted.forEach((r, i) => seq.set(r.id, i + 1));
+  allEnquiries.forEach(r => { r._seq = seq.get(r.id); });
 }
 
 function subscribeEnquiries() {
   sb.channel('enquiries-feed')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'enquiries' }, (payload) => {
       allEnquiries.unshift(payload.new);
+      assignSequenceNumbers();
       renderEnquiries();
     })
     .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'enquiries' }, (payload) => {
@@ -126,7 +136,7 @@ function renderEnquiries() {
 
   // Header
   const head = el('div', 'enq-row head');
-  ['Name','Email','Phone','Interested in','Received','Status'].forEach(t => head.appendChild(el('div', '', t)));
+  ['#','Name','Email','Phone','Interested in','Received','Status'].forEach(t => head.appendChild(el('div', '', t)));
   enqListEl.appendChild(head);
 
   rows.forEach(r => {
@@ -135,6 +145,7 @@ function renderEnquiries() {
     row.dataset.id = r.id;
     row.dataset.status = status;
 
+    row.appendChild(el('div', 'seq', '#' + (r._seq || '?')));
     row.appendChild(el('div', 'name', r.name || '—'));
     row.appendChild(el('div', 'email', r.email || '—'));
     row.appendChild(el('div', 'phone', r.phone || '—'));
