@@ -61,7 +61,7 @@
       <div class="reveal">
         <div class="eyebrow">Enquiry Form</div>
         <h2 class="h-medium" style="margin-top:0.75rem;margin-bottom:2.5rem">Send us a message.</h2>
-        <form class="contact-form" id="enquiryForm" action="javascript:void(0)" novalidate>
+        <form class="contact-form" id="enquiryForm" action="#" method="post" onsubmit="event.preventDefault();return false;" novalidate>
           <div class="field-row">
             <div class="field"><label for="name">Full Name *</label><input type="text" id="name" name="name" required></div>
             <div class="field"><label for="phone">Phone *</label><input type="tel" id="phone" name="phone" required inputmode="numeric" maxlength="10" pattern="\d{10}" title="Enter a 10-digit phone number" placeholder="10-digit number"></div>
