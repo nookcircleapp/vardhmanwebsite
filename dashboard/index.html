@@ -7,7 +7,7 @@
 <title>Vardhman Dashboard</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/dashboard/dashboard.css?v=5">
+<link rel="stylesheet" href="/dashboard/dashboard.css?v=6">
 </head>
 <body>
 
@@ -31,7 +31,10 @@
 <!-- APP VIEW -->
 <div id="appView" class="app">
   <div class="topbar">
-    <div class="brand"><small>Vardhman</small> Dashboard</div>
+    <a href="/" class="brand" aria-label="Vardhman Constructions">
+      <img src="https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/vardhman%20images%20and%20reels/Vardhman%20Images%20and%20videos/logovc4.png" alt="Vardhman Constructions" class="brand-logo">
+      <span class="brand-label"><small>Internal</small>Dashboard</span>
+    </a>
     <div class="user">
       <span id="whoami"></span>
       <button class="signout" id="signOutBtn">Sign out</button>
@@ -87,6 +90,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/dashboard/dashboard.js?v=5"></script>
+<script src="/dashboard/dashboard.js?v=6"></script>
 </body>
 </html>
