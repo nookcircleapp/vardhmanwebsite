@@ -116,6 +116,11 @@ function subscribeEnquiries() {
       if (i >= 0) allEnquiries[i] = payload.new;
       renderEnquiries();
     })
+    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'enquiries' }, (payload) => {
+      allEnquiries = allEnquiries.filter(r => r.id !== payload.old.id);
+      assignSequenceNumbers();
+      renderEnquiries();
+    })
     .subscribe();
 }
 
@@ -136,7 +141,7 @@ function renderEnquiries() {
 
   // Header
   const head = el('div', 'enq-row head');
-  ['#','Name','Email','Phone','Interested in','Received','Status'].forEach(t => head.appendChild(el('div', '', t)));
+  ['#','Name','Email','Phone','Interested in','Received','Status',''].forEach(t => head.appendChild(el('div', '', t)));
   enqListEl.appendChild(head);
 
   rows.forEach(r => {
@@ -170,6 +175,37 @@ function renderEnquiries() {
     const selWrap = document.createElement('div');
     selWrap.appendChild(sel);
     row.appendChild(selWrap);
+
+    // Delete button — two-click confirm
+    const delWrap = document.createElement('div');
+    const delBtn = document.createElement('button');
+    delBtn.className = 'del-btn';
+    delBtn.title = 'Delete enquiry';
+    delBtn.textContent = '×';
+    delBtn.dataset.id = r.id;
+    delBtn.addEventListener('click', async (ev) => {
+      ev.stopPropagation();
+      if (!delBtn.classList.contains('confirm')) {
+        delBtn.classList.add('confirm');
+        delBtn.textContent = 'Confirm';
+        setTimeout(() => { delBtn.classList.remove('confirm'); delBtn.textContent = '×'; }, 4000);
+        return;
+      }
+      delBtn.disabled = true;
+      const { error } = await sb.from('enquiries').delete().eq('id', r.id);
+      if (error) {
+        delBtn.disabled = false;
+        delBtn.classList.remove('confirm');
+        delBtn.textContent = '×';
+        alert('Could not delete: ' + error.message);
+        return;
+      }
+      allEnquiries = allEnquiries.filter(x => x.id !== r.id);
+      assignSequenceNumbers();
+      renderEnquiries();
+    });
+    delWrap.appendChild(delBtn);
+    row.appendChild(delWrap);
 
     if (r.message) {
       const m = el('div', 'msg-box', r.message);

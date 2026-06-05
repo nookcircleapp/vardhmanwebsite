@@ -30,6 +30,7 @@ alter table public.enquiries enable row level security;
 drop policy if exists "anon_insert_enquiries"          on public.enquiries;
 drop policy if exists "authenticated_read_enquiries"   on public.enquiries;
 drop policy if exists "authenticated_update_enquiries" on public.enquiries;
+drop policy if exists "authenticated_delete_enquiries" on public.enquiries;
 
 -- Public website can INSERT (the form)
 create policy "anon_insert_enquiries"
@@ -49,6 +50,12 @@ create policy "authenticated_update_enquiries"
   to authenticated
   using (true)
   with check (true);
+
+-- Logged-in users can delete enquiries
+create policy "authenticated_delete_enquiries"
+  on public.enquiries for delete
+  to authenticated
+  using (true);
 
 -- 3. Enable Realtime so dashboard updates live as new enquiries arrive
 alter publication supabase_realtime add table public.enquiries;
