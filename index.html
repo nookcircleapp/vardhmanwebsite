@@ -26,7 +26,7 @@
 <link rel="dns-prefetch" href="https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/css/styles.css?v=20260629">
+<link rel="stylesheet" href="assets/css/styles.css?v=20260630">
 
 <script type="application/ld+json">
 {
@@ -489,62 +489,74 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials">
+<section class="testimonials" data-rail>
   <div class="testimonials-head">
     <div class="eyebrow reveal">From the Residents</div>
     <h2 class="reveal reveal-d1">Voices from our <span class="serif-accent">communities</span>.</h2>
     <p class="lede reveal reveal-d2">Two and a half thousand families have called a Vardhman address home. A few of them shared what living with us has been like.</p>
   </div>
 
-  <div class="testimonials-grid">
-    <figure class="testimonial reveal">
-      <blockquote>Experience of living here is very nice. Here we met different people with different mindset — they all are helpful and friendly.</blockquote>
-      <figcaption>
-        <strong>Mr. Mansingh Rajput</strong>
-        <span>Resident · Vardhman Community</span>
-      </figcaption>
-    </figure>
+  <div class="testimonials-carousel-wrap">
+    <button type="button" class="carousel-btn carousel-btn-prev" data-rail-prev aria-label="Previous testimonial">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
 
-    <figure class="testimonial reveal reveal-d1">
-      <blockquote>Amazing professionalism from the Vardhman Constructions team — very helpful, and even after-sales service is excellent.</blockquote>
-      <figcaption>
-        <strong>Mr. Anil Sharma</strong>
-        <span>Resident · Vardhman Green Park</span>
-      </figcaption>
-    </figure>
+    <div class="testimonials-rail rail">
+      <figure class="testimonial rail-card">
+        <blockquote>Experience of living here is very nice. Here we met different people with different mindset — they all are helpful and friendly.</blockquote>
+        <figcaption>
+          <strong>Mr. Mansingh Rajput</strong>
+          <span>Resident · Vardhman Community</span>
+        </figcaption>
+      </figure>
 
-    <figure class="testimonial reveal reveal-d2">
-      <blockquote>Honestly the best construction quality in Bhopal. I've bought two houses in Vardhman townships and have referred many friends and family.</blockquote>
-      <figcaption>
-        <strong>Mr. Rajeev Mehta</strong>
-        <span>Resident · Vardhman City &amp; Green Valley</span>
-      </figcaption>
-    </figure>
+      <figure class="testimonial rail-card">
+        <blockquote>Amazing professionalism from the Vardhman Constructions team — very helpful, and even after-sales service is excellent.</blockquote>
+        <figcaption>
+          <strong>Mr. Anil Sharma</strong>
+          <span>Resident · Vardhman Green Park</span>
+        </figcaption>
+      </figure>
 
-    <figure class="testimonial reveal">
-      <blockquote>From booking to possession, the entire process was transparent. They actually delivered on every promise they made — rare in real estate today.</blockquote>
-      <figcaption>
-        <strong>Mrs. Priya Agrawal</strong>
-        <span>Resident · Vardhman Shikhar Meridian</span>
-      </figcaption>
-    </figure>
+      <figure class="testimonial rail-card">
+        <blockquote>Honestly the best construction quality in Bhopal. I've bought two houses in Vardhman townships and have referred many friends and family.</blockquote>
+        <figcaption>
+          <strong>Mr. Rajeev Mehta</strong>
+          <span>Resident · Vardhman City &amp; Green Valley</span>
+        </figcaption>
+      </figure>
 
-    <figure class="testimonial reveal reveal-d1">
-      <blockquote>Wide roads, lots of greenery, and a community that genuinely takes care of itself. My kids have grown up here — it just feels safe.</blockquote>
-      <figcaption>
-        <strong>Mr. Vivek Jain</strong>
-        <span>Resident · Vardhman Green City</span>
-      </figcaption>
-    </figure>
+      <figure class="testimonial rail-card">
+        <blockquote>From booking to possession, the entire process was transparent. They actually delivered on every promise they made — rare in real estate today.</blockquote>
+        <figcaption>
+          <strong>Mrs. Priya Agrawal</strong>
+          <span>Resident · Vardhman Shikhar Meridian</span>
+        </figcaption>
+      </figure>
 
-    <figure class="testimonial reveal reveal-d2">
-      <blockquote>The build quality, the layout, the attention to detail — you can see thirty years of experience in every corner of the home.</blockquote>
-      <figcaption>
-        <strong>Mr. Sandeep Verma</strong>
-        <span>Resident · Vardhman Green Enclave</span>
-      </figcaption>
-    </figure>
+      <figure class="testimonial rail-card">
+        <blockquote>Wide roads, lots of greenery, and a community that genuinely takes care of itself. My kids have grown up here — it just feels safe.</blockquote>
+        <figcaption>
+          <strong>Mr. Vivek Jain</strong>
+          <span>Resident · Vardhman Green City</span>
+        </figcaption>
+      </figure>
+
+      <figure class="testimonial rail-card">
+        <blockquote>The build quality, the layout, the attention to detail — you can see thirty years of experience in every corner of the home.</blockquote>
+        <figcaption>
+          <strong>Mr. Sandeep Verma</strong>
+          <span>Resident · Vardhman Green Enclave</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <button type="button" class="carousel-btn carousel-btn-next" data-rail-next aria-label="Next testimonial">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
   </div>
+
+  <div class="testimonials-dots" data-rail-dots></div>
 </section>
 
 <!-- EBOOK TEASER -->

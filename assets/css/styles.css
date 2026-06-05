@@ -2920,6 +2920,72 @@ section { position: relative; }
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(1.5rem, 2.5vw, 2rem);
 }
+
+/* Carousel variant */
+.testimonials-carousel-wrap {
+  position: relative;
+  max-width: var(--max-wide);
+  margin: 0 auto;
+}
+.testimonials-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(min(360px, 85vw), 1fr);
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 1rem;
+  padding: 0.5rem 0.5rem 1.5rem;
+  scrollbar-width: none;
+}
+.testimonials-rail::-webkit-scrollbar { display: none; }
+.testimonials-rail .testimonial { scroll-snap-align: center; min-width: 0; }
+@media (min-width: 980px) {
+  .testimonials-rail { grid-auto-columns: minmax(0, calc((100% - 2 * clamp(1.25rem, 2vw, 1.75rem)) / 3)); }
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,175,106,0.4);
+  background: rgba(11,11,11,0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.carousel-btn:hover { background: rgba(212,175,106,0.18); border-color: var(--gold); transform: translateY(-50%) scale(1.05); }
+.carousel-btn-prev { left: -8px; }
+.carousel-btn-next { right: -8px; }
+@media (max-width: 720px) {
+  .carousel-btn { display: none; }
+}
+
+.testimonials-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.testimonials-dots button {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(212,175,106,0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.testimonials-dots button:hover { background: rgba(212,175,106,0.5); }
+.testimonials-dots button.active { background: var(--gold); transform: scale(1.4); }
 .testimonial {
   margin: 0;
   padding: 3rem 2rem 2rem;
