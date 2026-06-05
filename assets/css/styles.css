@@ -1409,6 +1409,162 @@ section { position: relative; }
 .cinematic.light .cinematic-card.right { margin-left: auto; }
 .cinematic.right .cinematic-card { margin-left: auto; }
 
+/* --- Long-form Guide / Article pages --- */
+.guide-hero { padding-bottom: 3rem; }
+.guide-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  max-width: 720px;
+  margin: 2.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--hairline);
+}
+.guide-meta > div { text-align: left; }
+.guide-meta small {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  margin-bottom: 0.4rem;
+}
+.guide-meta strong {
+  display: block;
+  font-size: 0.98rem;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+@media (max-width: 720px) {
+  .guide-meta { grid-template-columns: 1fr; text-align: left; }
+}
+
+.guide-toc-section { padding: clamp(4rem, 7vw, 6rem) 0; }
+.guide-toc {
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0 0;
+  max-width: 760px;
+  counter-reset: none;
+}
+.guide-toc li {
+  border-top: 1px solid var(--hairline);
+}
+.guide-toc li:last-child { border-bottom: 1px solid var(--hairline); }
+.guide-toc a {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  color: var(--text);
+  transition: color 0.25s var(--ease), padding 0.25s var(--ease);
+}
+.guide-toc a:hover { color: var(--gold); padding-left: 0.5rem; }
+.guide-toc .toc-num {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+}
+.guide-toc .toc-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.guide-section { padding: clamp(4rem, 8vw, 7rem) 0; }
+.guide-section-alt { background: var(--paper); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+.guide-prose {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.guide-prose p,
+.guide-prose ul,
+.guide-prose ol {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 0 0 1.25rem;
+}
+.guide-prose p { text-align: left; hyphens: auto; }
+.guide-prose a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.guide-prose a:hover { color: var(--gold-bright); }
+
+.guide-chapter-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: end;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--hairline);
+}
+.guide-chapter-num {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 6vw, 5rem);
+  line-height: 0.85;
+  color: var(--gold);
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+.guide-chapter-head h2 { margin: 0.4rem 0 0; }
+@media (max-width: 560px) {
+  .guide-chapter-head { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+
+.guide-sub {
+  font-size: 1.4rem;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin: 2.5rem 0 1rem;
+  padding-top: 0.5rem;
+  font-weight: 600;
+}
+.guide-subsub {
+  font-size: 1.08rem;
+  letter-spacing: -0.005em;
+  color: var(--text);
+  margin: 1.75rem 0 0.6rem;
+  font-weight: 600;
+}
+
+.guide-bullets, .guide-numlist {
+  padding-left: 1.5rem;
+}
+.guide-bullets li, .guide-numlist li { margin-bottom: 0.5rem; }
+.guide-bullets li::marker { color: var(--gold); }
+.guide-numlist li::marker { color: var(--gold); font-weight: 600; }
+
+.guide-callout {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--gold);
+  background: rgba(212,175,106,0.05);
+  border-radius: 0 12px 12px 0;
+}
+.guide-callout p:last-child { margin-bottom: 0; }
+.guide-callout-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.guide-callout-warn { border-left-color: #d6a972; background: rgba(214,169,114,0.08); }
+.guide-callout ol, .guide-callout ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+
+.guide-credit {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--hairline);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 /* --- Contact form submit button --- */
 .contact-submit-btn { justify-self: start; }
 .contact-submit-btn[disabled] { opacity: 0.6; cursor: progress; }
