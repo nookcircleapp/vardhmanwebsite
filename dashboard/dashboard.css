@@ -113,6 +113,10 @@ a{color:var(--gold);text-decoration:none}
   margin-bottom:.4rem;
 }
 
+/* Ebook downloads — leaner column set */
+.enq-row.ebook-row{grid-template-columns:55px 1.4fr 1.8fr 1.1fr 1fr 90px;gap:1rem;align-items:center}
+.enq-row.ebook-row.head{align-items:center}
+
 .empty-state{padding:4rem 2rem;text-align:center;color:var(--muted);font-size:1rem}
 .empty-state .big{font-size:1.65rem;color:var(--text);margin-bottom:.5rem;font-family:'Fraunces',serif;font-style:italic}
 
