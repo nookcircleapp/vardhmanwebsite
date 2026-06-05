@@ -61,12 +61,12 @@
       <div class="reveal">
         <div class="eyebrow">Enquiry Form</div>
         <h2 class="h-medium" style="margin-top:0.75rem;margin-bottom:2.5rem">Send us a message.</h2>
-        <form class="contact-form" id="enquiryForm" novalidate>
+        <form class="contact-form" id="enquiryForm" action="javascript:void(0)" novalidate>
           <div class="field-row">
-            <div class="field"><label for="name">Full Name</label><input type="text" id="name" name="name" required></div>
-            <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" required inputmode="numeric" maxlength="10" pattern="\d{10}" title="Enter a 10-digit phone number" placeholder="10-digit number"></div>
+            <div class="field"><label for="name">Full Name *</label><input type="text" id="name" name="name" required></div>
+            <div class="field"><label for="phone">Phone *</label><input type="tel" id="phone" name="phone" required inputmode="numeric" maxlength="10" pattern="\d{10}" title="Enter a 10-digit phone number" placeholder="10-digit number"></div>
           </div>
-          <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="you@gmail.com"></div>
+          <div class="field"><label for="email">Email *</label><input type="email" id="email" name="email" required placeholder="you@gmail.com"></div>
           <div class="field">
             <label for="project">Interested In</label>
             <select id="project" name="project">
@@ -76,10 +76,23 @@
               <option>Vardhman Celestia — 4 BHK, Ayodhya Bypass</option>
             </select>
           </div>
-          <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Tell us what you're looking for…"></textarea></div>
+          <div class="field"><label for="message">Message *</label><textarea id="message" name="message" rows="4" required placeholder="Tell us what you're looking for…"></textarea></div>
           <button type="submit" class="btn btn-primary contact-submit-btn" id="enquirySubmitBtn"><span class="btn-label">Send Enquiry</span> <span class="arrow">→</span></button>
           <div id="enquiryStatus" class="enquiry-status" role="status" aria-live="polite"></div>
         </form>
+
+        <!-- Success modal -->
+        <div id="enquiryModal" class="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="enquiryModalTitle" hidden>
+          <div class="enquiry-modal-backdrop" data-modal-close></div>
+          <div class="enquiry-modal-card">
+            <div class="enquiry-modal-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 12l3 3 5-6"></path></svg>
+            </div>
+            <h3 id="enquiryModalTitle">Enquiry sent.</h3>
+            <p>Thank you. One of our executives will get back to you shortly.</p>
+            <button type="button" class="btn btn-primary" data-modal-close>Close</button>
+          </div>
+        </div>
 
         <script>
         (function () {
@@ -88,9 +101,29 @@
           var form = document.getElementById('enquiryForm');
           var btn = document.getElementById('enquirySubmitBtn');
           var status = document.getElementById('enquiryStatus');
+          var modal = document.getElementById('enquiryModal');
           if (!form) return;
           var label = btn.querySelector('.btn-label');
           var originalLabel = label ? label.textContent : 'Send Enquiry';
+
+          function showEnquiryModal() {
+            if (!modal) return;
+            modal.hidden = false;
+            document.body.style.overflow = 'hidden';
+          }
+          function hideEnquiryModal() {
+            if (!modal) return;
+            modal.hidden = true;
+            document.body.style.overflow = '';
+          }
+          if (modal) {
+            modal.addEventListener('click', function (ev) {
+              if (ev.target.hasAttribute('data-modal-close')) hideEnquiryModal();
+            });
+            document.addEventListener('keydown', function (ev) {
+              if (ev.key === 'Escape' && !modal.hidden) hideEnquiryModal();
+            });
+          }
 
           var ALLOWED_EMAIL_DOMAINS = [
             'gmail.com','googlemail.com',
@@ -167,7 +200,8 @@
                 return res.text().then(function (t) { throw new Error(t || ('HTTP ' + res.status)); });
               }
               form.reset();
-              setStatus('Thanks — we will get back to you within one business day.', 'ok');
+              showEnquiryModal();
+              setStatus('', '');
             }).catch(function (err) {
               console.error('Enquiry submit failed', err);
               setStatus('Sorry — could not send. Please call us or try again.', 'err');
