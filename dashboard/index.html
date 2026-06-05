@@ -7,7 +7,7 @@
 <title>Vardhman Dashboard</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/dashboard/dashboard.css?v=2">
+<link rel="stylesheet" href="/dashboard/dashboard.css?v=3">
 </head>
 <body>
 
@@ -60,11 +60,24 @@
     <!-- ENQUIRIES -->
     <div class="section-head">
       <h2>Enquiries <small id="enqCount">0</small></h2>
-      <div class="filter">
-        <button data-f="all" class="active">All</button>
-        <button data-f="new">New</button>
-        <button data-f="contacted">Contacted</button>
-        <button data-f="closed">Closed</button>
+      <div class="filter-group">
+        <span class="filter-label">Status</span>
+        <div class="filter" id="statusFilter">
+          <button data-f="all" class="active">All</button>
+          <button data-f="new">New</button>
+          <button data-f="contacted">Contacted</button>
+          <button data-f="closed">Closed</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Interest</span>
+        <div class="filter" id="projectFilter">
+          <button data-p="all" class="active">All</button>
+          <button data-p="fairmont">Fairmont</button>
+          <button data-p="celestia-2">Celestia 2 BHK</button>
+          <button data-p="celestia-3">Celestia 3 BHK</button>
+          <button data-p="celestia-4">Celestia 4 BHK</button>
+        </div>
       </div>
     </div>
 
@@ -74,6 +87,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/dashboard/dashboard.js?v=2"></script>
+<script src="/dashboard/dashboard.js?v=3"></script>
 </body>
 </html>

@@ -21,9 +21,19 @@ const liveSEl     = document.getElementById('liveS');
 const liveRowsEl  = document.getElementById('liveRows');
 
 let allEnquiries = [];
-let currentFilter = 'all';
+let statusFilter = 'all';
+let projectFilter = 'all';
 let presenceState = {};
 let liveTickInterval = null;
+
+function projectKey(label) {
+  const s = (label || '').toLowerCase();
+  if (s.indexOf('fairmont') !== -1) return 'fairmont';
+  if (s.indexOf('celestia') !== -1 && s.indexOf('2 bhk') !== -1) return 'celestia-2';
+  if (s.indexOf('celestia') !== -1 && s.indexOf('3 bhk') !== -1) return 'celestia-3';
+  if (s.indexOf('celestia') !== -1 && s.indexOf('4 bhk') !== -1) return 'celestia-4';
+  return 'other';
+}
 
 // ---------- AUTH ----------
 async function checkSession() {
@@ -100,10 +110,13 @@ function subscribeEnquiries() {
 }
 
 function renderEnquiries() {
-  const rows = currentFilter === 'all'
-    ? allEnquiries
-    : allEnquiries.filter(r => (r.status || 'new') === currentFilter);
+  const rows = allEnquiries.filter(r => {
+    const sOk = statusFilter === 'all' || (r.status || 'new') === statusFilter;
+    const pOk = projectFilter === 'all' || projectKey(r.project) === projectFilter;
+    return sOk && pOk;
+  });
   enqCountEl.textContent = rows.length;
+  updateFilterBadges();
   enqListEl.replaceChildren();
 
   if (rows.length === 0) {
@@ -148,7 +161,7 @@ function renderEnquiries() {
     row.appendChild(selWrap);
 
     if (r.message) {
-      const m = el('div', 'msg-line', '"' + r.message + '"');
+      const m = el('div', 'msg-box', r.message);
       row.appendChild(m);
     }
 
@@ -156,15 +169,52 @@ function renderEnquiries() {
   });
 }
 
-// Filter buttons
-document.querySelectorAll('.filter button').forEach(b => {
+// Filter buttons — status
+document.querySelectorAll('#statusFilter button').forEach(b => {
   b.addEventListener('click', () => {
-    document.querySelectorAll('.filter button').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('#statusFilter button').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
-    currentFilter = b.dataset.f;
+    statusFilter = b.dataset.f;
     renderEnquiries();
   });
 });
+// Filter buttons — project/interest
+document.querySelectorAll('#projectFilter button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#projectFilter button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    projectFilter = b.dataset.p;
+    renderEnquiries();
+  });
+});
+
+function updateFilterBadges() {
+  // Status counts
+  const statusCounts = { all: allEnquiries.length, new: 0, contacted: 0, closed: 0 };
+  // Project counts
+  const projectCounts = { all: allEnquiries.length, 'fairmont': 0, 'celestia-2': 0, 'celestia-3': 0, 'celestia-4': 0 };
+  allEnquiries.forEach(r => {
+    const s = r.status || 'new';
+    if (statusCounts[s] !== undefined) statusCounts[s]++;
+    const p = projectKey(r.project);
+    if (projectCounts[p] !== undefined) projectCounts[p]++;
+  });
+  document.querySelectorAll('#statusFilter button').forEach(b => {
+    setBadge(b, statusCounts[b.dataset.f]);
+  });
+  document.querySelectorAll('#projectFilter button').forEach(b => {
+    setBadge(b, projectCounts[b.dataset.p]);
+  });
+}
+function setBadge(btn, n) {
+  let badge = btn.querySelector('.badge');
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.className = 'badge';
+    btn.appendChild(badge);
+  }
+  badge.textContent = n;
+}
 
 // ---------- PRESENCE ----------
 function subscribePresence() {
