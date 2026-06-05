@@ -49,7 +49,28 @@ function showApp(user) {
   loginView.style.display = 'none';
   appView.classList.add('show');
   whoami.textContent = user.email;
+  applyRoleScope(user.email);
   bootApp();
+}
+
+// Hide filter chips the signed-in user has no access to.
+function applyRoleScope(email) {
+  const e = (email || '').toLowerCase();
+  const allowed = { fairmont: false, 'celestia-2': false, 'celestia-3': false, 'celestia-4': false };
+  if (e === 'admin@vardhman.com') {
+    allowed.fairmont = allowed['celestia-2'] = allowed['celestia-3'] = allowed['celestia-4'] = true;
+  } else if (e === 'saif@vardhman.com') {
+    allowed.fairmont = true;
+  } else if (e === 'sudhanshu@vardhman.com') {
+    allowed['celestia-2'] = allowed['celestia-3'] = allowed['celestia-4'] = true;
+  } else {
+    // unknown user — be safe, show everything (RLS still enforces)
+    allowed.fairmont = allowed['celestia-2'] = allowed['celestia-3'] = allowed['celestia-4'] = true;
+  }
+  document.querySelectorAll('#projectFilter button').forEach(b => {
+    const key = b.dataset.p;
+    if (key !== 'all' && !allowed[key]) b.style.display = 'none';
+  });
 }
 
 loginForm.addEventListener('submit', async (e) => {

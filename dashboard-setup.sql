@@ -38,24 +38,42 @@ create policy "anon_insert_enquiries"
   to anon, authenticated
   with check (true);
 
--- Only logged-in dashboard users can READ
+-- Per-user visibility:
+--   admin@vardhman.com    → all enquiries
+--   saif@vardhman.com     → only Fairmont enquiries
+--   sudhanshu@vardhman.com → only Celestia enquiries
 create policy "authenticated_read_enquiries"
   on public.enquiries for select
   to authenticated
-  using (true);
+  using (
+    auth.jwt() ->> 'email' = 'admin@vardhman.com'
+    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and project ilike '%fairmont%')
+    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and project ilike '%celestia%')
+  );
 
--- Logged-in users can mark status (new / contacted / closed)
+-- Update / delete inherit the same scope (saif can't touch celestia rows etc.)
 create policy "authenticated_update_enquiries"
   on public.enquiries for update
   to authenticated
-  using (true)
-  with check (true);
+  using (
+    auth.jwt() ->> 'email' = 'admin@vardhman.com'
+    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and project ilike '%fairmont%')
+    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and project ilike '%celestia%')
+  )
+  with check (
+    auth.jwt() ->> 'email' = 'admin@vardhman.com'
+    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and project ilike '%fairmont%')
+    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and project ilike '%celestia%')
+  );
 
--- Logged-in users can delete enquiries
 create policy "authenticated_delete_enquiries"
   on public.enquiries for delete
   to authenticated
-  using (true);
+  using (
+    auth.jwt() ->> 'email' = 'admin@vardhman.com'
+    or (auth.jwt() ->> 'email' = 'saif@vardhman.com'      and project ilike '%fairmont%')
+    or (auth.jwt() ->> 'email' = 'sudhanshu@vardhman.com' and project ilike '%celestia%')
+  );
 
 -- 3. Enable Realtime so dashboard updates live as new enquiries arrive
 alter publication supabase_realtime add table public.enquiries;
