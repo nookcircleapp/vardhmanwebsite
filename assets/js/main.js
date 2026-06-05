@@ -3,6 +3,23 @@
 (function () {
   'use strict';
 
+  // Deter casual image downloads / right-click save
+  // (note: a determined visitor can still grab assets via DevTools — this only stops the easy paths)
+  document.addEventListener('contextmenu', function (e) {
+    var tag = (e.target && e.target.tagName) || '';
+    if (tag === 'IMG' || tag === 'VIDEO' || tag === 'SOURCE' || tag === 'PICTURE') {
+      e.preventDefault();
+    }
+  });
+  document.addEventListener('dragstart', function (e) {
+    var tag = (e.target && e.target.tagName) || '';
+    if (tag === 'IMG' || tag === 'VIDEO' || tag === 'SOURCE' || tag === 'PICTURE') {
+      e.preventDefault();
+    }
+  });
+  // iOS Safari long-press save & callout
+  document.documentElement.style.webkitTouchCallout = 'none';
+
   // Haptic feedback on tappable elements
   // Works on Android Chrome/Firefox (Web Vibration API). iOS Safari has no
   // equivalent web API — there is no workaround for iOS.

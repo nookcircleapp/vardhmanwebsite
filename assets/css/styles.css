@@ -1413,6 +1413,20 @@ section { position: relative; }
 .cinematic.light .cinematic-card.right { margin-left: auto; }
 .cinematic.right .cinematic-card { margin-left: auto; }
 
+/* Deter casual image downloads */
+img, video, picture, source {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 /* ============================================
    HOME EBOOK TEASER
    ============================================ */
