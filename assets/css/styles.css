@@ -1540,7 +1540,7 @@ section { position: relative; }
 }
 .ebook-cover > img {
   width: 100%;
-  max-width: 380px;
+  max-width: 520px;
   height: auto;
   border-radius: 14px;
   display: block;
@@ -1550,7 +1550,7 @@ section { position: relative; }
 }
 .ebook-cover:hover > img { transform: rotate(0deg) translateY(-4px); }
 @media (max-width: 880px) {
-  .ebook-cover > img { max-width: 320px; }
+  .ebook-cover > img { max-width: 420px; }
 }
 .ebook-cover-card {
   position: relative;
