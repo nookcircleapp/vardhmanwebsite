@@ -3,15 +3,40 @@
 (function () {
   'use strict';
 
-  // Haptic feedback on tappable elements (mobile only — Android Web Vibration API)
-  if ('vibrate' in navigator && matchMedia('(hover: none) and (pointer: coarse)').matches) {
-    var tapSelector = 'button, .btn, .nav-cta, .nav-toggle, .nav-links a, a.link, .logo-tile, .ebook-card, [data-haptic]';
-    document.addEventListener('pointerdown', function (e) {
-      var t = e.target.closest && e.target.closest(tapSelector);
+  // Haptic feedback on tappable elements
+  // Works on Android Chrome/Firefox (Web Vibration API). iOS Safari has no
+  // equivalent web API — there is no workaround for iOS.
+  (function () {
+    if (typeof navigator === 'undefined' || typeof navigator.vibrate !== 'function') return;
+    var isTouch = matchMedia('(hover: none) and (pointer: coarse)').matches
+      || ('ontouchstart' in window)
+      || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+    if (!isTouch) return;
+
+    var tapSelector = 'a, button, input[type="submit"], input[type="button"], .btn, .nav-toggle, .logo-tile, .ebook-card, .carousel-btn, [data-haptic]';
+    var TAP_MS = 25;
+    var unlocked = false;
+
+    // Some Android browsers gate vibrate() behind a user-gesture activation.
+    // Fire a single zero-length vibrate on the first interaction to "unlock".
+    var unlock = function () {
+      if (unlocked) return;
+      try { navigator.vibrate(0); navigator.vibrate(1); unlocked = true; } catch (_) {}
+    };
+    window.addEventListener('touchstart', unlock, { passive: true, once: true });
+    window.addEventListener('pointerdown', unlock, { passive: true, once: true });
+
+    var buzz = function (e) {
+      var t = e.target && e.target.closest ? e.target.closest(tapSelector) : null;
       if (!t || t.disabled) return;
-      try { navigator.vibrate(10); } catch (err) {}
-    }, { passive: true });
-  }
+      try { navigator.vibrate(TAP_MS); } catch (_) {}
+    };
+
+    // pointerdown fires fastest; click is a fallback for browsers that
+    // delay/cancel pointer events.
+    document.addEventListener('pointerdown', buzz, { passive: true });
+    document.addEventListener('click', buzz, { passive: true });
+  })();
 
   const nav = document.querySelector('.nav');
   const navToggle = document.querySelector('.nav-toggle');
