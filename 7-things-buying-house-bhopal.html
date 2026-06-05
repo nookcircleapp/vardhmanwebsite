@@ -71,7 +71,7 @@
       <p class="lede">A builder's checklist — not a brochure. Three decades of work in Bhopal, distilled into a quick read every home-buyer in this city should have before signing anything.</p>
       <div class="ebook-hero-actions">
         <a href="#download" class="btn btn-primary">Get the ebook <span class="arrow">→</span></a>
-        <a href="#chapters" class="btn btn-secondary">See what's inside</a>
+        <a href="https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/7%20Things%20to%20consider%20before%20buying%20a%20house%20in%20Bhopal.pdf" class="btn btn-secondary" download target="_blank" rel="noopener">Download PDF</a>
       </div>
       <ul class="ebook-hero-meta">
         <li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg> Honest, builder-written advice</li>
@@ -266,7 +266,8 @@
       <div class="ebook-download-text">
         <div class="eyebrow">Free Download</div>
         <h2>Get the full ebook, free.</h2>
-        <p>Drop your number and we'll send the PDF straight to you on WhatsApp. No spam — and if you ever want a site visit, you know where to find us.</p>
+        <p>Leave your details and the PDF opens instantly. We'll also keep your number on file so our team can help if you ever want a site visit — no spam.</p>
+        <p style="margin-top:1rem;font-size:0.88rem;color:var(--text-quiet)">Prefer to skip the form? <a href="https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/7%20Things%20to%20consider%20before%20buying%20a%20house%20in%20Bhopal.pdf" download target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline">Download the PDF directly →</a></p>
       </div>
       <form class="ebook-download-form" id="ebookForm" novalidate>
         <div class="ebook-form-row">
@@ -326,7 +327,8 @@
     }).then(function (res) {
       if (!res.ok) { return res.text().then(function (t) { throw new Error(t || ('HTTP ' + res.status)); }); }
       form.reset();
-      setStatus('Done — we will WhatsApp you the ebook shortly.', 'ok');
+      setStatus('Opening your ebook now…', 'ok');
+      window.open('https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/7%20Things%20to%20consider%20before%20buying%20a%20house%20in%20Bhopal.pdf', '_blank', 'noopener');
     }).catch(function (err) {
       console.error('Ebook submit failed', err);
       setStatus('Sorry — could not send. Please call us on +91 88713 39894.', 'err');
