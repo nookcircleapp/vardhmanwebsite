@@ -1443,7 +1443,7 @@ section { position: relative; }
 }
 .home-ebook-cover img {
   width: 100%;
-  max-width: 300px;
+  max-width: 390px;
   height: auto;
   border-radius: 12px;
   display: block;
@@ -2928,21 +2928,26 @@ section { position: relative; }
   margin: 0 auto;
 }
 .testimonials-rail {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(min(360px, 85vw), 1fr);
+  display: flex;
   gap: clamp(1.25rem, 2vw, 1.75rem);
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-padding: 1rem;
+  scroll-padding: 0.5rem;
   padding: 0.5rem 0.5rem 1.5rem;
   scrollbar-width: none;
 }
 .testimonials-rail::-webkit-scrollbar { display: none; }
-.testimonials-rail .testimonial { scroll-snap-align: center; min-width: 0; }
-@media (min-width: 980px) {
-  .testimonials-rail { grid-auto-columns: minmax(0, calc((100% - 2 * clamp(1.25rem, 2vw, 1.75rem)) / 3)); }
+.testimonials-rail .testimonial {
+  flex: 0 0 calc((100% - 2 * clamp(1.25rem, 2vw, 1.75rem)) / 3);
+  scroll-snap-align: start;
+  min-width: 0;
+}
+@media (max-width: 980px) {
+  .testimonials-rail .testimonial { flex-basis: calc((100% - clamp(1.25rem, 2vw, 1.75rem)) / 2); }
+}
+@media (max-width: 640px) {
+  .testimonials-rail .testimonial { flex-basis: 88%; }
 }
 .carousel-btn {
   position: absolute;
