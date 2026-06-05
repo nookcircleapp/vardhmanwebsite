@@ -3026,14 +3026,14 @@ img, video, picture, source {
 .testimonial::before {
   content: '“';
   position: absolute;
-  top: -0.5rem;
-  left: 1.5rem;
+  top: 1.5rem;
+  left: 1.75rem;
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 5.5rem;
+  font-size: 4.5rem;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.55;
+  opacity: 0.5;
   pointer-events: none;
   text-shadow: 0 4px 30px rgba(212,175,106,0.2);
 }
