@@ -1237,6 +1237,84 @@ section { position: relative; }
   .hero-edit-meta-right .btn { width: 100%; justify-content: center; }
 }
 
+/* --- Featured On platform strip --- */
+.featured-on {
+  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(2rem, 4vw, 3rem);
+  background: #0a0a0a;
+  border-top: 1px solid rgba(201, 163, 91, 0.12);
+  border-bottom: 1px solid rgba(201, 163, 91, 0.12);
+}
+.featured-on-eyebrow {
+  text-align: center;
+  color: var(--gold, #c9a35b);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+.featured-on-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.featured-on-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  min-height: 92px;
+}
+.featured-on-tile:hover {
+  border-color: var(--gold, #c9a35b);
+  background: rgba(201, 163, 91, 0.06);
+  transform: translateY(-2px);
+}
+.featured-on-platform {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f3f0e8;
+  letter-spacing: 0.01em;
+}
+.featured-on-project {
+  font-size: 0.72rem;
+  color: var(--gold, #c9a35b);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+.featured-on-note {
+  text-align: center;
+  color: var(--text-muted, #8a877f);
+  font-size: 0.85rem;
+  margin: 1.75rem auto 0;
+  max-width: 60ch;
+}
+.featured-on-note a {
+  color: var(--gold, #c9a35b);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+.featured-on-note a:hover {
+  color: var(--gold-soft, #e6c98a);
+}
+@media (max-width: 720px) {
+  .featured-on-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* --- Ticker strip --- */
 .ticker {
   background: var(--canvas);
