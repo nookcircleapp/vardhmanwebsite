@@ -1719,7 +1719,8 @@ section { position: relative; }
   user-select: none;
 }
 @media (max-width: 720px) {
-  .featured-on-logo { height: 90px; max-width: 240px; }
+  .featured-on-tile { padding: 2rem 1.25rem; min-height: 160px; }
+  .featured-on-logo { height: 130px; max-width: 80%; margin-left: auto; margin-right: auto; }
 }
 .featured-on-links {
   margin-top: 0.85rem;
