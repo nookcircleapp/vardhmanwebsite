@@ -1555,6 +1555,9 @@ section { position: relative; }
 }
 .article-cta p { color: #c8c1ad; margin-bottom: 1.5rem; font-size: 0.98rem; line-height: 1.6; }
 .article-cta .btn { position: relative; }
+.article-cta .btn-primary,
+.article-cta .btn-primary:visited { color: #ffffff !important; }
+.article-cta .btn-primary .arrow { color: #ffffff; }
 
 /* "Key takeaway" inline emphasis block (short, full-width) */
 .key-takeaway {
