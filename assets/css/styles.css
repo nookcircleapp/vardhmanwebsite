@@ -1264,42 +1264,63 @@ section { position: relative; }
   margin: 0 auto;
   padding: 0 var(--gutter, 1.5rem);
 }
+.featured-on-row--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 880px;
+  gap: 1.5rem;
+}
 .featured-on-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 1.75rem 1.25rem;
   border: 1px solid rgba(201, 163, 91, 0.35);
-  border-radius: 12px;
+  border-radius: 14px;
   background: linear-gradient(180deg, rgba(201, 163, 91, 0.05) 0%, rgba(201, 163, 91, 0.02) 100%);
-  text-decoration: none;
   transition: all 0.2s ease;
-  min-height: 108px;
+  min-height: 128px;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
 }
 .featured-on-tile:hover {
   border-color: var(--gold, #c9a35b);
-  background: linear-gradient(180deg, rgba(201, 163, 91, 0.14) 0%, rgba(201, 163, 91, 0.06) 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(201, 163, 91, 0.12);
+  background: linear-gradient(180deg, rgba(201, 163, 91, 0.10) 0%, rgba(201, 163, 91, 0.04) 100%);
+  box-shadow: 0 8px 24px rgba(201, 163, 91, 0.10);
 }
-.featured-on-platform {
-  font-size: 1.05rem;
+.featured-on-project {
+  font-size: 1.1rem;
   font-weight: 600;
   color: #f8f5ed;
   letter-spacing: 0.01em;
-  line-height: 1.1;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
 }
-.featured-on-project {
-  font-size: 0.72rem;
+.featured-on-links {
+  margin-top: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--text-muted, #8a877f);
+  font-size: 0.9rem;
+}
+.featured-on-links a {
   color: var(--gold, #c9a35b);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin-top: 0.5rem;
-  font-weight: 600;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  transition: all 0.15s;
+  border: 1px solid transparent;
 }
+.featured-on-links a:hover {
+  background: rgba(201, 163, 91, 0.10);
+  border-color: rgba(201, 163, 91, 0.4);
+  color: var(--gold-soft, #e6c98a);
+}
+.featured-on-sep { color: rgba(201, 163, 91, 0.4); }
 .featured-on-note {
   text-align: center;
   color: var(--text-muted, #8a877f);
@@ -1316,11 +1337,11 @@ section { position: relative; }
 }
 .featured-on-note a:hover { color: var(--gold-soft, #e6c98a); }
 @media (max-width: 720px) {
-  .featured-on-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .featured-on-tile { min-height: 88px; padding: 1.1rem .75rem; }
-  .featured-on-platform { font-size: .95rem; }
+  .featured-on-row { grid-template-columns: repeat(2, 1fr); }
+  .featured-on-row--two { grid-template-columns: 1fr; }
+  .featured-on-tile { min-height: 110px; padding: 1.25rem .9rem; }
+  .featured-on-project { font-size: 1rem; }
+  .featured-on-links { font-size: .85rem; gap: .4rem; }
 }
 
 /* --- Ticker strip --- */
