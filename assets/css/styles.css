@@ -1237,6 +1237,388 @@ section { position: relative; }
   .hero-edit-meta-right .btn { width: 100%; justify-content: center; }
 }
 
+/* ================================================================
+   ARTICLE / EDITORIAL LAYOUT
+   For long-form blog posts under /blog/* and area pages under /areas/*
+   Apply with <article class="article-body">…</article>
+   ================================================================ */
+
+/* Reading progress bar (subtle, fixed top) */
+.read-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--gold, #c9a35b), var(--gold-soft, #e6c98a));
+  z-index: 1000;
+  transition: width 0.08s ease-out;
+  box-shadow: 0 0 12px rgba(201, 163, 91, 0.5);
+}
+
+/* Article container — narrower than .container for ideal reading width */
+.article-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 var(--gutter, 1.5rem);
+}
+
+/* Meta strip (eyebrow + read time + dot indicators) */
+.article-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem;
+  padding: 1.25rem 0; margin: -1rem 0 2rem;
+  border-top: 1px solid rgba(201, 163, 91, 0.16);
+  border-bottom: 1px solid rgba(201, 163, 91, 0.16);
+  font-size: 0.78rem; color: var(--text-muted, #8a877f);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.article-meta .dot { color: rgba(201, 163, 91, 0.4); }
+
+/* TL;DR / In-60-Seconds box */
+.tldr-box {
+  position: relative;
+  border: 1px solid rgba(201, 163, 91, 0.32);
+  background: linear-gradient(180deg, rgba(201, 163, 91, 0.06) 0%, rgba(201, 163, 91, 0.02) 100%);
+  border-radius: 16px;
+  padding: 1.6rem 1.75rem 1.4rem;
+  margin: 2.5rem 0 3rem;
+}
+.tldr-box::before {
+  content: 'In 60 seconds';
+  display: inline-block;
+  font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold, #c9a35b); font-weight: 600;
+  background: #0a0a0a; padding: 0.25rem 0.7rem; border-radius: 50px;
+  border: 1px solid rgba(201, 163, 91, 0.32);
+  position: absolute; top: -0.7rem; left: 1.5rem;
+}
+.tldr-box p { margin: 0.5rem 0 0; line-height: 1.65; color: #e6e2d5; font-size: 1rem; }
+.tldr-box ul { margin: 0.5rem 0 0; padding-left: 1.25rem; }
+.tldr-box li { color: #e6e2d5; line-height: 1.55; margin-bottom: 0.4rem; }
+.tldr-box li::marker { color: var(--gold, #c9a35b); }
+
+/* Core typography */
+.article-body { font-size: 1.075rem; line-height: 1.78; color: #d9d5c8; }
+.article-body > p { margin: 0 0 1.4rem; }
+
+/* Drop cap on first paragraph */
+.article-body > p:first-of-type::first-letter {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 4.2rem;
+  line-height: 0.85;
+  float: left;
+  margin: 0.35rem 0.7rem -0.15rem 0;
+  color: var(--gold, #c9a35b);
+}
+
+/* Section headings */
+.article-body h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f5f1e6;
+  margin: 3.5rem 0 1.4rem;
+  padding-top: 1.4rem;
+  position: relative;
+}
+.article-body h2::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 44px; height: 2px;
+  background: linear-gradient(90deg, var(--gold, #c9a35b), transparent);
+}
+
+.article-body h3 {
+  font-size: 1.18rem; font-weight: 600;
+  color: #ece6d2;
+  margin: 2.25rem 0 0.9rem;
+  letter-spacing: -0.005em;
+}
+
+/* Lists — gold markers + breathing room */
+.article-body ul,
+.article-body ol { margin: 1rem 0 1.8rem; padding-left: 1.5rem; }
+.article-body li {
+  margin: 0.65rem 0;
+  line-height: 1.7;
+  padding-left: 0.35rem;
+}
+.article-body li::marker {
+  color: var(--gold, #c9a35b);
+  font-weight: 600;
+}
+.article-body ol li::marker { font-family: 'Fraunces', serif; font-style: italic; }
+.article-body li strong { color: #f3eedb; font-weight: 600; }
+
+/* Inline emphasis */
+.article-body strong { color: #f3eedb; font-weight: 600; }
+.article-body em { font-family: 'Fraunces', serif; font-style: italic; color: #e6c98a; }
+
+/* Links inside article body */
+.article-body a {
+  color: var(--gold, #c9a35b);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 163, 91, 0.35);
+  padding-bottom: 0.5px;
+  transition: all 0.15s;
+}
+.article-body a:hover { color: var(--gold-soft, #e6c98a); border-bottom-color: currentColor; }
+
+/* Pull quote / big quote block */
+.article-body blockquote,
+.pull-quote {
+  margin: 2.5rem 0;
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  border-left: 3px solid var(--gold, #c9a35b);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: #ece6d2;
+}
+.pull-quote cite {
+  display: block; margin-top: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted, #8a877f);
+  font-weight: 500;
+}
+
+/* Boxed callouts — three variants */
+.callout {
+  margin: 2rem 0;
+  padding: 1.5rem 1.6rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--gold, #c9a35b);
+  position: relative;
+}
+.callout-label {
+  display: inline-block;
+  font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold, #c9a35b); font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.callout > p:last-child { margin-bottom: 0; }
+.callout--gold {
+  border-left-color: var(--gold, #c9a35b);
+  background: linear-gradient(180deg, rgba(201, 163, 91, 0.08), rgba(201, 163, 91, 0.02));
+  border-color: rgba(201, 163, 91, 0.25);
+}
+.callout--warn {
+  border-left-color: #ff7e6b;
+  background: linear-gradient(180deg, rgba(255, 126, 107, 0.06), rgba(255, 126, 107, 0.01));
+}
+.callout--warn .callout-label { color: #ff9a8a; }
+.callout--insight {
+  border-left-color: #6bbcff;
+  background: linear-gradient(180deg, rgba(107, 188, 255, 0.05), rgba(107, 188, 255, 0.01));
+}
+.callout--insight .callout-label { color: #92cdff; }
+
+/* Stat highlight strip (3-4 big numbers in a row) */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #0d0d0d;
+  border: 1px solid rgba(201, 163, 91, 0.18);
+  border-radius: 14px;
+}
+.stat-cell { text-align: center; padding: 0.5rem; }
+.stat-cell .stat-num {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  color: var(--gold, #c9a35b);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.stat-cell .stat-label {
+  font-size: 0.72rem; color: var(--text-muted, #8a877f);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Highlighted inline text (yellow marker effect) */
+.article-body .highlight {
+  background: linear-gradient(180deg, transparent 55%, rgba(201, 163, 91, 0.28) 55%, rgba(201, 163, 91, 0.28) 92%, transparent 92%);
+  padding: 0 0.15em;
+  color: #f8f3e0;
+  font-weight: 500;
+}
+
+/* Rich data table */
+.data-table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  background: #0d0d0d;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.95rem;
+}
+.data-table thead { background: #111; }
+.data-table th {
+  text-align: left;
+  padding: 0.95rem 1.1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold, #c9a35b);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(201, 163, 91, 0.18);
+}
+.data-table td {
+  padding: 0.95rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #d9d5c8;
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: 0; }
+.data-table tr:hover td { background: rgba(201, 163, 91, 0.03); }
+.data-table td strong { color: #f3eedb; }
+.data-table-wrap { overflow-x: auto; }
+
+/* Section divider with gold accent */
+.article-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 163, 91, 0.4), transparent);
+  margin: 3.5rem 0;
+}
+
+/* Final CTA box at end of article */
+.article-cta {
+  margin: 4rem 0 2rem;
+  padding: 2.25rem 2rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(201, 163, 91, 0.10) 0%, rgba(15, 12, 8, 0.6) 100%);
+  border: 1px solid rgba(201, 163, 91, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.article-cta::before {
+  content: '';
+  position: absolute; top: -50%; right: -10%;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(201,163,91,0.16) 0%, transparent 60%);
+  pointer-events: none;
+}
+.article-cta .cta-eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold, #c9a35b); font-weight: 600; margin-bottom: 0.75rem;
+}
+.article-cta h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.4rem; font-weight: 600;
+  color: #f5f1e6;
+  margin: 0 0 0.85rem;
+  letter-spacing: -0.02em;
+}
+.article-cta p { color: #c8c1ad; margin-bottom: 1.5rem; font-size: 0.98rem; line-height: 1.6; }
+.article-cta .btn { position: relative; }
+
+/* "Key takeaway" inline emphasis block (short, full-width) */
+.key-takeaway {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  background: #0d0d0d;
+  border: 1px dashed rgba(201, 163, 91, 0.35);
+  border-radius: 10px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #ece6d2;
+}
+.key-takeaway::before {
+  content: '✦ ';
+  color: var(--gold, #c9a35b);
+  margin-right: 0.3rem;
+}
+
+/* "FAQ" treatment */
+.article-faq { margin: 2.5rem 0; }
+.article-faq details {
+  border-bottom: 1px solid rgba(201, 163, 91, 0.18);
+  padding: 1.1rem 0;
+}
+.article-faq details[open] summary { color: var(--gold, #c9a35b); }
+.article-faq summary {
+  font-weight: 600; font-size: 1.05rem;
+  color: #f3eedb;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: 2rem;
+  transition: color 0.15s;
+}
+.article-faq summary::-webkit-details-marker { display: none; }
+.article-faq summary::after {
+  content: '+';
+  position: absolute; right: 0; top: 0;
+  color: var(--gold, #c9a35b);
+  font-size: 1.5rem; font-weight: 300;
+  transition: transform 0.2s;
+}
+.article-faq details[open] summary::after { content: '−'; }
+.article-faq details p { margin: 0.8rem 0 0; color: #c8c1ad; }
+
+/* Related reading at end of article */
+.related-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.9rem;
+  margin: 1.5rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+.related-list li { margin: 0; padding: 0; }
+.related-list a {
+  display: block;
+  padding: 0.95rem 1.15rem;
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  color: #ece6d2;
+  text-decoration: none;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  transition: all 0.15s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.related-list a:hover {
+  border-color: rgba(201, 163, 91, 0.4);
+  background: rgba(201, 163, 91, 0.05);
+  color: #f5f1e6;
+  transform: translateY(-1px);
+}
+.related-list a::after {
+  content: ' →';
+  color: var(--gold, #c9a35b);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .article-body { font-size: 1.025rem; line-height: 1.72; }
+  .article-body > p:first-of-type::first-letter { font-size: 3.4rem; }
+  .article-body h2 { font-size: 1.35rem; margin-top: 2.5rem; }
+  .tldr-box { padding: 1.4rem 1.25rem 1.2rem; }
+  .article-cta { padding: 1.75rem 1.4rem; }
+  .pull-quote, .article-body blockquote { font-size: 1.15rem; padding-left: 1.25rem; }
+  .data-table th, .data-table td { padding: 0.75rem 0.85rem; font-size: 0.88rem; }
+}
+
 /* --- Featured On platform strip --- */
 .featured-on {
   padding: clamp(3.5rem, 6vw, 5rem) 0 clamp(3rem, 5vw, 4rem);
@@ -3162,13 +3544,22 @@ img, video, picture, source {
 }
 .testimonial blockquote {
   margin: 0 0 1.75rem;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  line-height: 1.6;
+  padding-top: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.22rem;
+  line-height: 1.55;
   letter-spacing: -0.005em;
-  color: var(--text);
-  font-weight: 400;
+  color: var(--cream, var(--text));
+  font-weight: 300;
   font-style: italic;
+  position: relative;
+  z-index: 1;
+  text-wrap: pretty;
+}
+.testimonial blockquote::first-letter {
+  color: var(--gold);
+  font-weight: 400;
+  margin-right: 0.04em;
 }
 .testimonial figcaption {
   display: flex;
