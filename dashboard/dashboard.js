@@ -100,7 +100,101 @@ async function bootApp() {
   subscribeEnquiries();
   subscribePresence();
   liveTickInterval = setInterval(renderLive, 5000);
+  loadTopArticles();
 }
+
+// ---------- TOP ARTICLES ----------
+const ARTICLE_TITLES = {
+  '/blog/best-builders-in-bhopal':       'Best Builders in Bhopal — 2026 Guide',
+  '/blog/townships-in-ayodhya-bypass':   'Townships in Ayodhya Bypass',
+  '/blog/hoshangabad-road-vs-ayodhya-bypass': 'Hoshangabad Road vs Ayodhya Bypass',
+  '/blog/rera-verification-bhopal':      'Verify a Bhopal Builder’s RERA in 5 Minutes',
+  '/blog/home-loans-bhopal':             'Home Loans in Bhopal 2026',
+  '/blog/2-bhk-vs-3-bhk-bhopal':         '2 BHK vs 3 BHK in Bhopal',
+  '/blog/5-bhk-triplex-bhopal':          'The 5 BHK Triplex Format',
+  '/blog/bhopal-master-plan-2031':       'Bhopal Master Plan 2031',
+  '/blog/stamp-duty-registration-mp':    'Stamp Duty in MP 2026',
+  '/blog/first-time-home-buyer-bhopal':  'First-Time Home Buyer Guide — Bhopal',
+  '/areas/hoshangabad-road':             'Hoshangabad Road Locality Guide',
+  '/areas/ayodhya-bypass':               'Ayodhya Bypass Locality Guide',
+  '/7-things-buying-house-bhopal':       '7 Things — Free Ebook Landing',
+  '/projects/vardhman-fairmont':         'Vardhman Fairmont (Project page)',
+  '/projects/vardhman-celestia':         'Vardhman Celestia (Project page)',
+};
+
+function titleForPath(path) {
+  return ARTICLE_TITLES[path] || path.split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function timeAgo(iso) {
+  if (!iso) return '';
+  const sec = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
+  if (sec < 60) return 'just now';
+  if (sec < 3600) return Math.floor(sec/60) + 'm ago';
+  if (sec < 86400) return Math.floor(sec/3600) + 'h ago';
+  return Math.floor(sec/86400) + 'd ago';
+}
+
+async function loadTopArticles() {
+  const container = document.getElementById('topArticles');
+  const totalEl = document.getElementById('topArticlesTotal');
+  if (!container) return;
+
+  const { data, error } = await sb
+    .from('view_counts')
+    .select('*')
+    .order('count', { ascending: false })
+    .limit(50);
+
+  if (error) {
+    container.replaceChildren(makeEmpty('Could not load top articles', error.message || ''));
+    return;
+  }
+  const rows = data || [];
+  if (totalEl) {
+    const total = rows.reduce((s, r) => s + (r.count || 0), 0);
+    totalEl.textContent = total.toLocaleString('en-IN') + ' views';
+  }
+
+  container.replaceChildren();
+  if (rows.length === 0) {
+    container.appendChild(makeEmpty('No views tracked yet', 'View counts will appear here as visitors read your articles.'));
+    return;
+  }
+
+  // Header
+  const head = el('div', 'top-article-row head');
+  ['#', 'Article', 'Last viewed', 'Views'].forEach(t => head.appendChild(el('div', '', t)));
+  container.appendChild(head);
+
+  rows.forEach((r, i) => {
+    const link = document.createElement('a');
+    link.className = 'top-article-row';
+    link.href = r.path;
+    link.target = '_blank';
+    link.rel = 'noopener';
+
+    link.appendChild(el('div', 'top-article-rank', String(i + 1)));
+
+    const titleWrap = el('div');
+    titleWrap.appendChild(el('div', 'top-article-title', titleForPath(r.path)));
+    titleWrap.appendChild(el('div', 'top-article-path', r.path));
+    link.appendChild(titleWrap);
+
+    link.appendChild(el('div', 'top-article-time', timeAgo(r.updated_at)));
+
+    const viewsWrap = el('div', 'top-article-views');
+    viewsWrap.textContent = (r.count || 0).toLocaleString('en-IN');
+    const lbl = el('small', '', r.count === 1 ? 'view' : 'views');
+    viewsWrap.appendChild(lbl);
+    link.appendChild(viewsWrap);
+
+    container.appendChild(link);
+  });
+}
+
+const refreshArticlesBtn = document.getElementById('refreshArticlesBtn');
+if (refreshArticlesBtn) refreshArticlesBtn.addEventListener('click', loadTopArticles);
 
 // ---------- ENQUIRIES ----------
 async function loadEnquiries() {
