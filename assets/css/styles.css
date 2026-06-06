@@ -1277,6 +1277,26 @@ section { position: relative; }
   letter-spacing: 0.06em; text-transform: uppercase;
 }
 .article-meta .dot { color: rgba(201, 163, 91, 0.4); }
+.article-meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+}
+.article-meta .meta-item svg {
+  width: 14px; height: 14px;
+  flex-shrink: 0;
+  color: var(--gold, #c9a35b);
+  opacity: 0.9;
+}
+.article-meta [data-view-count] {
+  color: #bfbcb1;
+  font-variant-numeric: tabular-nums;
+}
+.article-meta [data-view-count]:empty::before {
+  content: '— views';
+  opacity: 0.5;
+}
 
 /* TL;DR / In-60-Seconds box */
 .tldr-box {
