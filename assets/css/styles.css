@@ -4879,6 +4879,35 @@ a.vlist-item:hover .vlist-arrow { opacity: 1; transform: translateX(0); }
   .legacy-row-category { grid-column: 2; text-align: left; font-size: 0.65rem; letter-spacing: 0.14em; }
 }
 
+/* ============== CONTACT WHATSAPP LINKS ============== */
+.contact-wa-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+}
+.contact-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #e9e3d3;
+  text-decoration: none;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  border-radius: 999px;
+  background: rgba(37, 211, 102, 0.06);
+  width: fit-content;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+.contact-wa svg { color: #25d366; flex-shrink: 0; }
+.contact-wa em { color: var(--text-quiet); font-style: normal; font-size: 0.85em; margin-left: 0.25rem; }
+.contact-wa:hover {
+  border-color: #25d366;
+  background: rgba(37, 211, 102, 0.12);
+  transform: translateY(-1px);
+}
+
 /* ============== UTILS ============== */
 .text-center { text-align: center; }
 .mt-lg { margin-top: 3rem; }
