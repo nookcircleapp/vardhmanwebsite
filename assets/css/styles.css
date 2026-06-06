@@ -1031,7 +1031,15 @@ section { position: relative; }
   max-width: var(--max-wide);
   margin: 0 auto;
 }
-.journal-card { display: flex; flex-direction: column; gap: 1.25rem; }
+.journal-card { display: flex; flex-direction: column; gap: 1.25rem; position: relative; cursor: pointer; }
+.journal-card .link { position: relative; z-index: 2; }
+.journal-card > .link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.journal-card:hover h3 { color: var(--gold); transition: color 0.3s var(--ease); }
 .journal-card-img {
   border-radius: 14px;
   overflow: hidden;
