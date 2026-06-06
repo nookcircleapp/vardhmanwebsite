@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.vardhmanconstructions.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/about.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/projects/vardhman-fairmont.html</loc><priority>0.95</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/projects/vardhman-celestia.html</loc><priority>0.95</priority><changefreq>weekly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/projects.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/best-builders-in-bhopal.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/townships-in-ayodhya-bypass.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/hoshangabad-road-vs-ayodhya-bypass.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/7-things-buying-house-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/about.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/services.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/blog.html</loc><priority>0.7</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/projects/vardhman-fairmont.html</loc><priority>0.95</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/projects/vardhman-celestia.html</loc><priority>0.95</priority><changefreq>weekly</changefreq></url>
 </urlset>
