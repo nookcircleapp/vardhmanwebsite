@@ -1707,6 +1707,19 @@ section { position: relative; }
   font-style: italic;
   font-weight: 500;
 }
+.featured-on-logo {
+  display: block;
+  height: 56px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+  -webkit-user-drag: none;
+  user-select: none;
+}
+@media (max-width: 720px) {
+  .featured-on-logo { height: 44px; max-width: 170px; }
+}
 .featured-on-links {
   margin-top: 0.85rem;
   display: inline-flex;
