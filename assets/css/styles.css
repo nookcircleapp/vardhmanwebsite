@@ -1709,16 +1709,17 @@ section { position: relative; }
 }
 .featured-on-logo {
   display: block;
-  height: 56px;
+  margin: 0 auto;
+  height: 110px;
   width: auto;
-  max-width: 220px;
+  max-width: 320px;
   object-fit: contain;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
   -webkit-user-drag: none;
   user-select: none;
 }
 @media (max-width: 720px) {
-  .featured-on-logo { height: 44px; max-width: 170px; }
+  .featured-on-logo { height: 90px; max-width: 240px; }
 }
 .featured-on-links {
   margin-top: 0.85rem;
