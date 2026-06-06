@@ -59,6 +59,16 @@ a{color:var(--gold);text-decoration:none}
 .section-head{display:flex;justify-content:flex-start;align-items:center;flex-wrap:wrap;gap:1.25rem;margin-bottom:1.25rem}
 .section-head h2{font-size:1.4rem;font-weight:600;margin-right:.5rem}
 .section-head h2 small{color:var(--muted);font-weight:400;margin-left:.5rem;font-size:1rem}
+.export-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;border:1px solid var(--line-2);color:var(--text);
+  padding:.55rem 1rem;border-radius:8px;cursor:pointer;
+  font-family:inherit;font-size:.85rem;font-weight:500;
+  transition:all .15s;
+}
+.export-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,163,91,.06)}
+.export-btn svg{flex-shrink:0}
+.export-btn:disabled{opacity:.5;cursor:not-allowed}
 .filter-group{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .filter-group .filter-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-right:.25rem}
 .filter{display:flex;gap:.45rem;flex-wrap:wrap}

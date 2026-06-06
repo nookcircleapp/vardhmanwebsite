@@ -7,7 +7,7 @@
 <title>Vardhman Dashboard</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/dashboard/dashboard.css?v=15">
+<link rel="stylesheet" href="/dashboard/dashboard.css?v=16">
 </head>
 <body>
 
@@ -63,6 +63,10 @@
     <!-- ENQUIRIES -->
     <div class="section-head">
       <h2>Enquiries <small id="enqCount">0</small></h2>
+      <button id="exportBtn" class="export-btn" type="button" title="Download visible rows as CSV (opens in Excel)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export to Excel
+      </button>
       <div class="filter-group">
         <span class="filter-label">Status</span>
         <div class="filter" id="statusFilter">
@@ -91,6 +95,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/dashboard/dashboard.js?v=15"></script>
+<script src="/dashboard/dashboard.js?v=16"></script>
 </body>
 </html>

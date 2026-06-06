@@ -238,6 +238,71 @@ function renderEnquiries() {
   });
 }
 
+// ---------- EXPORT TO CSV (opens in Excel) ----------
+function csvCell(v) {
+  if (v == null) return '';
+  const s = String(v);
+  // Escape: wrap in quotes if contains comma, quote, or newline; double internal quotes
+  if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+function formatTimestampForCsv(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  const pad = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function downloadCsv() {
+  // Use the same filter set the user is currently viewing
+  const rows = allEnquiries.filter(r => {
+    const sOk = statusFilter === 'all' || (r.status || 'new') === statusFilter;
+    const pOk = projectFilter === 'all' || projectKey(r.project) === projectFilter;
+    return sOk && pOk;
+  });
+
+  if (rows.length === 0) {
+    alert('No enquiries to export with the current filter.');
+    return;
+  }
+
+  const headers = ['#', 'Name', 'Email', 'Phone', 'Interested In', 'Message', 'Status', 'Received At', 'Source URL'];
+  const lines = [headers.join(',')];
+
+  // Oldest first for natural reading
+  const ordered = [...rows].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+  ordered.forEach(r => {
+    lines.push([
+      r._seq || '',
+      r.name,
+      r.email,
+      r.phone,
+      r.project,
+      r.message,
+      r.status || 'new',
+      formatTimestampForCsv(r.created_at),
+      r.source_url
+    ].map(csvCell).join(','));
+  });
+
+  // UTF-8 BOM helps Excel render special characters (—, ₹, ✓) correctly
+  const csv = '﻿' + lines.join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+
+  const today = new Date();
+  const stamp = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+  const filename = `vardhman-enquiries-${stamp}.csv`;
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+}
+const exportBtn = document.getElementById('exportBtn');
+if (exportBtn) exportBtn.addEventListener('click', downloadCsv);
+
 // Filter buttons — status
 document.querySelectorAll('#statusFilter button').forEach(b => {
   b.addEventListener('click', () => {
