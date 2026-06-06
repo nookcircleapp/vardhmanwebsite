@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core -->
   <url><loc>https://www.vardhmanconstructions.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/projects/vardhman-fairmont.html</loc><priority>0.95</priority><changefreq>weekly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/projects/vardhman-celestia.html</loc><priority>0.95</priority><changefreq>weekly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/projects.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+
+  <!-- Area landing pages -->
+  <url><loc>https://www.vardhmanconstructions.com/areas/hoshangabad-road.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/areas/ayodhya-bypass.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+
+  <!-- Blog articles -->
   <url><loc>https://www.vardhmanconstructions.com/blog/best-builders-in-bhopal.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/blog/townships-in-ayodhya-bypass.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/blog/hoshangabad-road-vs-ayodhya-bypass.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/rera-verification-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/home-loans-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/2-bhk-vs-3-bhk-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/5-bhk-triplex-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/bhopal-master-plan-2031.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/stamp-duty-registration-mp.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/first-time-home-buyer-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+
+  <!-- Ebook + supporting -->
   <url><loc>https://www.vardhmanconstructions.com/7-things-buying-house-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/about.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/services.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog.html</loc><priority>0.7</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog.html</loc><priority>0.75</priority><changefreq>weekly</changefreq></url>
 </urlset>
