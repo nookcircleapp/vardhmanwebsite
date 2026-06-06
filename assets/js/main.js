@@ -309,6 +309,7 @@
   var closeIcon = svg({ class: 'wa-close', viewBox: '0 0 24 24', width: '22', height: '22', 'aria-hidden': 'true', fill: 'none', stroke: 'currentColor', 'stroke-width': '2.5', 'stroke-linecap': 'round' });
   closeIcon.appendChild(path('M6 6l12 12M18 6l-12 12'));
   btn.appendChild(waIcon);
+  btn.appendChild(el('span', { class: 'wa-label' }, 'Need help?'));
   btn.appendChild(closeIcon);
 
   wrap.appendChild(panel);
