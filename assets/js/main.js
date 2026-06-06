@@ -260,6 +260,75 @@
   });
 })();
 
+// --- WHATSAPP FLOATING CHAT BUBBLE (Fairmont + Celestia options) ---
+(function injectWhatsApp() {
+  if (window.location.pathname.indexOf('/dashboard') === 0) return;
+  if (document.getElementById('wa-widget')) return;
+
+  var WA_FAIRMONT = 'https://api.whatsapp.com/send?phone=918871339894&text=Hi%2C%20I%20am%20interested%20in%20Vardhman%20Fairmont%20';
+  var WA_CELESTIA = 'https://api.whatsapp.com/send?phone=918641067162&text=I%20am%20interested%20in%20Vardhman%20Celestia.%20Please%20send%20me%20details%20';
+
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function svg(attrs) {
+    var s = document.createElementNS(SVG_NS, 'svg');
+    for (var k in attrs) s.setAttribute(k, attrs[k]);
+    return s;
+  }
+  function path(d, attrs) {
+    var p = document.createElementNS(SVG_NS, 'path');
+    p.setAttribute('d', d);
+    if (attrs) for (var k in attrs) p.setAttribute(k, attrs[k]);
+    return p;
+  }
+  function option(href, name, sub) {
+    var a = el('a', { class: 'wa-option', href: href, target: '_blank', rel: 'noopener' });
+    a.appendChild(el('span', { class: 'wa-option-name' }, name));
+    a.appendChild(el('span', { class: 'wa-option-sub' }, sub));
+    return a;
+  }
+
+  var wrap = el('div', { id: 'wa-widget' });
+
+  var panel = el('div', { class: 'wa-panel', 'aria-hidden': 'true' });
+  var head = el('div', { class: 'wa-panel-head' });
+  head.appendChild(el('strong', null, 'Chat on WhatsApp'));
+  head.appendChild(el('span', null, 'Pick a project to start the conversation.'));
+  panel.appendChild(head);
+  panel.appendChild(option(WA_FAIRMONT, 'Vardhman Fairmont', '5 BHK Triplex · Hoshangabad Road'));
+  panel.appendChild(option(WA_CELESTIA, 'Vardhman Celestia', '2 / 3 BHK · Triplex · Ayodhya Bypass'));
+
+  var btn = el('button', { type: 'button', class: 'wa-bubble', 'aria-label': 'Chat on WhatsApp', 'aria-expanded': 'false' });
+  var waIcon = svg({ viewBox: '0 0 32 32', width: '28', height: '28', 'aria-hidden': 'true', fill: 'currentColor' });
+  waIcon.appendChild(path('M16.001 3C9.376 3 4 8.376 4 15c0 2.122.553 4.116 1.523 5.85L4 29l8.357-1.482A11.93 11.93 0 0 0 16 27c6.625 0 12-5.375 12-12S22.625 3 16.001 3zm0 22a9.9 9.9 0 0 1-5.06-1.385l-.363-.214-4.964.88.879-4.835-.236-.374A9.95 9.95 0 0 1 6 15c0-5.514 4.486-10 10.001-10 5.514 0 9.999 4.486 9.999 10s-4.485 10-9.999 10zm5.49-7.49c-.3-.15-1.776-.876-2.05-.976-.275-.1-.475-.15-.675.15-.2.3-.776.976-.95 1.176-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.413-1.491-.892-.796-1.493-1.78-1.668-2.08-.175-.3-.018-.462.132-.611.135-.135.3-.351.45-.526.15-.175.2-.3.3-.5.1-.2.05-.376-.025-.526-.075-.15-.676-1.628-.927-2.231-.244-.585-.491-.505-.676-.514l-.575-.01c-.2 0-.526.075-.802.376-.275.3-1.05 1.026-1.05 2.503s1.075 2.905 1.225 3.105c.15.2 2.114 3.228 5.124 4.527.716.31 1.275.495 1.71.633.718.228 1.371.196 1.888.119.575-.086 1.776-.726 2.027-1.426.25-.7.25-1.301.175-1.426-.075-.125-.275-.2-.575-.35z'));
+  var closeIcon = svg({ class: 'wa-close', viewBox: '0 0 24 24', width: '22', height: '22', 'aria-hidden': 'true', fill: 'none', stroke: 'currentColor', 'stroke-width': '2.5', 'stroke-linecap': 'round' });
+  closeIcon.appendChild(path('M6 6l12 12M18 6l-12 12'));
+  btn.appendChild(waIcon);
+  btn.appendChild(closeIcon);
+
+  wrap.appendChild(panel);
+  wrap.appendChild(btn);
+  document.body.appendChild(wrap);
+
+  btn.addEventListener('click', function () {
+    var open = wrap.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+  });
+  document.addEventListener('click', function (e) {
+    if (!wrap.contains(e.target) && wrap.classList.contains('open')) {
+      wrap.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('aria-hidden', 'true');
+    }
+  });
+})();
+
 // --- LIVE PRESENCE TRACKING (broadcasts this visitor to the dashboard) ---
 (function loadPresence() {
   if (window.location.pathname.indexOf('/dashboard') === 0) return; // dashboard tracks itself separately
