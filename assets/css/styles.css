@@ -108,18 +108,16 @@ section { position: relative; }
 /* ============== BUTTONS / LINKS ============== */
 .btn {
   position: relative;
+  /* Fixed height + zero vertical padding = flex centers content exactly. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   gap: 0.55rem;
-  /* Asymmetric padding: most uppercase-friendly sans fonts have a heavier
-     ascender than descender, so the geometric center of the line-box sits
-     ABOVE the optical center. Adding a few extra pixels of padding-top
-     pulls the text down to where the eye expects it. */
-  padding: 1.15rem 1.85rem 1.05rem;
+  height: 52px;
+  padding: 0 1.85rem;
   font-size: 1rem;
-  line-height: 1.2;
+  line-height: 1;
   font-weight: 500;
   letter-spacing: -0.005em;
   border-radius: 999px;
@@ -127,12 +125,14 @@ section { position: relative; }
   white-space: nowrap;
   overflow: hidden;
   isolation: isolate;
-  min-height: 52px;
 }
 .btn > * {
   display: inline-flex;
   align-items: center;
   line-height: 1;
+  /* Pull the rendered glyph box up by half its descender-bias to land on
+     the geometric center of the pill. */
+  margin-top: -1px;
 }
 .btn .arrow {
   line-height: 1;
