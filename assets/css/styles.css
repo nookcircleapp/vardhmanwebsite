@@ -1274,12 +1274,27 @@ section { position: relative; }
 
 /* Meta strip (eyebrow + read time + dot indicators) */
 .article-meta {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1rem;
   padding: 1.25rem 0; margin: -1rem 0 2rem;
   border-top: 1px solid rgba(201, 163, 91, 0.16);
   border-bottom: 1px solid rgba(201, 163, 91, 0.16);
   font-size: 0.78rem; color: var(--text-muted, #8a877f);
   letter-spacing: 0.06em; text-transform: uppercase;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.article-meta::-webkit-scrollbar { display: none; }
+@media (max-width: 720px) {
+  .article-meta {
+    gap: 0.7rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+  }
+  .article-meta .meta-item svg { width: 14px; height: 14px; }
 }
 .article-meta .dot { color: rgba(201, 163, 91, 0.4); }
 .article-meta .meta-item {

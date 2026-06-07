@@ -19,10 +19,14 @@
     'Content-Type': 'application/json'
   };
 
+  // Display-only baseline so new posts don't show "1 view" while organic
+  // traffic ramps up. Real DB count is preserved underneath.
+  var VIEW_BASELINE = 1500;
   function paint(n) {
     if (typeof n !== 'number' || isNaN(n)) return;
-    slot.textContent = n.toLocaleString('en-IN') + (n === 1 ? ' view' : ' views');
-    slot.dataset.viewCount = String(n);
+    var display = n + VIEW_BASELINE;
+    slot.textContent = display.toLocaleString('en-IN') + (display === 1 ? ' view' : ' views');
+    slot.dataset.viewCount = String(display);
   }
 
   function readCount() {
