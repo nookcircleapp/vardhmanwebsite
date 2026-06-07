@@ -4991,7 +4991,22 @@ a.vlist-item:hover .vlist-arrow { opacity: 1; transform: translateX(0); }
 .mt-lg { margin-top: 3rem; }
 .mt-xl { margin-top: 5rem; }
 .nowrap { white-space: nowrap; }
+
+/* Best-builders page hero — long, multi-clause title needs to feel
+   editorial rather than billboard. */
+.best-builders-h1 {
+  font-size: clamp(1.85rem, 4vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  font-weight: 600;
+  max-width: 22ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
+}
+.best-builders-h1 .nowrap { font-weight: 600; }
+.best-builders-h1 .serif-accent { font-weight: 400; }
 @media (max-width: 560px) {
-  /* On very small phones, allow Vardhman Constructions to shrink rather than overflow */
-  .h-hero .nowrap { font-size: 0.85em; }
+  .best-builders-h1 { font-size: 1.55rem; line-height: 1.18; }
+  .best-builders-h1 .nowrap { font-size: 0.95em; }
 }
