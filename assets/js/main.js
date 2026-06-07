@@ -35,23 +35,29 @@
     var unlocked = false;
 
     // Some Android browsers gate vibrate() behind a user-gesture activation.
-    // Fire a single zero-length vibrate on the first interaction to "unlock".
+    // Fire a single zero-length vibrate on the first interaction to "unlock"
+    // — this does not actually buzz the device.
     var unlock = function () {
       if (unlocked) return;
-      try { navigator.vibrate(0); navigator.vibrate(1); unlocked = true; } catch (_) {}
+      try { navigator.vibrate(0); unlocked = true; } catch (_) {}
     };
     window.addEventListener('touchstart', unlock, { passive: true, once: true });
     window.addEventListener('pointerdown', unlock, { passive: true, once: true });
 
+    // Debounce: prevent the same tap from firing twice
+    // (pointerdown + click both fire for the same gesture).
+    var lastBuzz = 0;
     var buzz = function (e) {
       var t = e.target && e.target.closest ? e.target.closest(tapSelector) : null;
       if (!t || t.disabled) return;
+      var now = (e.timeStamp || (performance && performance.now()) || 0) | 0;
+      if (now - lastBuzz < 350) return;
+      lastBuzz = now;
       try { navigator.vibrate(TAP_MS); } catch (_) {}
     };
 
-    // pointerdown fires fastest; click is a fallback for browsers that
-    // delay/cancel pointer events.
-    document.addEventListener('pointerdown', buzz, { passive: true });
+    // Bind to `click` only — pointerdown was double-buzzing on every tap
+    // because click fires immediately after for the same gesture.
     document.addEventListener('click', buzz, { passive: true });
   })();
 
