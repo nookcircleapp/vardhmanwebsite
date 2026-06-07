@@ -113,11 +113,13 @@ section { position: relative; }
   justify-content: center;
   text-align: center;
   gap: 0.55rem;
-  /* Use equal padding-block so the text glyph box sits in the exact center */
-  padding-block: 1.05rem;
-  padding-inline: 1.85rem;
+  /* Asymmetric padding: most uppercase-friendly sans fonts have a heavier
+     ascender than descender, so the geometric center of the line-box sits
+     ABOVE the optical center. Adding a few extra pixels of padding-top
+     pulls the text down to where the eye expects it. */
+  padding: 1.15rem 1.85rem 1.05rem;
   font-size: 1rem;
-  line-height: 1;
+  line-height: 1.2;
   font-weight: 500;
   letter-spacing: -0.005em;
   border-radius: 999px;
@@ -130,14 +132,11 @@ section { position: relative; }
 .btn > * {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   line-height: 1;
 }
 .btn .arrow {
   line-height: 1;
   font-size: 1em;
-  display: inline-flex;
-  align-items: center;
 }
 .btn-primary,
 .btn-gold {
