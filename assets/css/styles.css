@@ -1032,13 +1032,18 @@ section { position: relative; }
   margin: 0 auto;
 }
 .journal-card { display: flex; flex-direction: column; gap: 1.25rem; position: relative; cursor: pointer; }
-.journal-card .link { position: relative; z-index: 2; }
+/* Stretched link: the ::after pseudo positions from the CARD (nearest
+   positioned ancestor), so the link itself must be statically positioned.
+   Any other interactive elements inside the card need z-index >= 2 to sit
+   above the overlay. */
+.journal-card > .link { position: static; }
 .journal-card > .link::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
 }
+.journal-card > .link > * { position: relative; z-index: 2; }
 .journal-card:hover h3 { color: var(--gold); transition: color 0.3s var(--ease); }
 .journal-card-img {
   border-radius: 14px;
