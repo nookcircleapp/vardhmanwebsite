@@ -25,7 +25,9 @@
   function paint(n) {
     if (typeof n !== 'number' || isNaN(n)) return;
     var display = n + VIEW_BASELINE;
-    slot.textContent = display.toLocaleString('en-IN') + (display === 1 ? ' view' : ' views');
+    // Number only — the eye icon in the meta strip already conveys "views",
+    // so the word is redundant and gets clipped on narrow mobiles.
+    slot.textContent = display.toLocaleString('en-IN');
     slot.dataset.viewCount = String(display);
   }
 
