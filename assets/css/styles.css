@@ -2714,6 +2714,7 @@ img, video, picture, source {
 .logo-mark-section {
   padding: clamp(4rem, 7vw, 6rem) var(--gutter);
   background: var(--black);
+  text-align: center;
 }
 .logo-mark-inner {
   position: relative;
@@ -2738,8 +2739,9 @@ img, video, picture, source {
   display: inline-block;
   line-height: 0;
   margin: 0 auto;
+  text-align: center;
 }
-.logo-mark-figure img { display: block; }
+.logo-mark-figure img { display: block; margin: 0 auto; }
 .logo-mark-shine {
   position: absolute;
   inset: 0;
