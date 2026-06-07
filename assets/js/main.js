@@ -268,7 +268,14 @@
 
 // --- WHATSAPP FLOATING CHAT BUBBLE (Fairmont + Celestia options) ---
 (function injectWhatsApp() {
-  if (window.location.pathname.indexOf('/dashboard') === 0) return;
+  // Only show on Fairmont, Celestia, and Contact pages.
+  var p = window.location.pathname.toLowerCase();
+  var allowed = (
+    p.indexOf('vardhman-fairmont') !== -1 ||
+    p.indexOf('vardhman-celestia') !== -1 ||
+    p.indexOf('contact') !== -1
+  );
+  if (!allowed) return;
   if (document.getElementById('wa-widget')) return;
 
   var WA_FAIRMONT = 'https://api.whatsapp.com/send?phone=918871339894&text=Hi%2C%20I%20am%20interested%20in%20Vardhman%20Fairmont%20';
