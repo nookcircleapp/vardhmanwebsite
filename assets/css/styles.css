@@ -4952,3 +4952,8 @@ a.vlist-item:hover .vlist-arrow { opacity: 1; transform: translateX(0); }
 .text-center { text-align: center; }
 .mt-lg { margin-top: 3rem; }
 .mt-xl { margin-top: 5rem; }
+.nowrap { white-space: nowrap; }
+@media (max-width: 560px) {
+  /* On very small phones, allow Vardhman Constructions to shrink rather than overflow */
+  .h-hero .nowrap { font-size: 0.85em; }
+}
