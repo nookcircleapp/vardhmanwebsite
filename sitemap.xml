@@ -9,6 +9,8 @@
   <!-- Area landing pages -->
   <url><loc>https://www.vardhmanconstructions.com/areas/hoshangabad-road.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/areas/ayodhya-bypass.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/areas/arera-colony.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/areas/bawadiya-kalan.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
 
   <!-- Blog articles -->
   <url><loc>https://www.vardhmanconstructions.com/blog/best-builders-in-bhopal.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
@@ -21,6 +23,9 @@
   <url><loc>https://www.vardhmanconstructions.com/blog/bhopal-master-plan-2031.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/blog/stamp-duty-registration-mp.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.vardhmanconstructions.com/blog/first-time-home-buyer-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/commercial-property-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/nri-buyer-guide-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/bhopal-vs-indore.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
 
   <!-- Ebook + supporting -->
   <url><loc>https://www.vardhmanconstructions.com/7-things-buying-house-bhopal.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
