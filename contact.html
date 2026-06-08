@@ -21,6 +21,7 @@
 <link rel="dns-prefetch" href="https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css?v=20260652">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ContactPage","mainEntity":{"@type":"RealEstateAgent","name":"Vardhman Constructions","telephone":["+91-887-1339894","+91-887-1339894"],"email":"vardhmanbhopal130@gmail.com","address":{"@type":"PostalAddress","streetAddress":"130, Malviya Nagar","addressLocality":"Bhopal","addressRegion":"Madhya Pradesh","postalCode":"462003","addressCountry":"IN"}}}
@@ -76,6 +77,7 @@
             </select>
           </div>
           <div class="field"><label for="message">Message *</label><textarea id="message" name="message" rows="4" required placeholder="Tell us what you're looking for…"></textarea></div>
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAADgwpTMYgItPwEta" data-theme="light" style="margin-bottom:1rem"></div>
           <button type="submit" class="btn btn-primary contact-submit-btn" id="enquirySubmitBtn"><span class="btn-label">Send Enquiry</span> <span class="arrow">→</span></button>
           <div id="enquiryStatus" class="enquiry-status" role="status" aria-live="polite"></div>
         </form>
@@ -175,6 +177,14 @@
             if (label) label.textContent = 'Sending…';
             setStatus('', '');
 
+            var turnstileToken = (window.turnstile && typeof turnstile.getResponse === 'function') ? turnstile.getResponse() : (form.querySelector('[name="cf-turnstile-response"]') || {}).value;
+            if (!turnstileToken) {
+              setStatus('Please complete the CAPTCHA above.', 'err');
+              btn.disabled = false;
+              if (label) label.textContent = originalLabel;
+              return;
+            }
+
             var payload = {
               name: form.name.value.trim(),
               phone: form.phone.value.trim(),
@@ -182,17 +192,13 @@
               project: form.project.value,
               message: form.message.value.trim() || null,
               source_url: window.location.href,
-              user_agent: navigator.userAgent
+              user_agent: navigator.userAgent,
+              turnstileToken: turnstileToken
             };
 
-            fetch(SUPABASE_URL + '/rest/v1/enquiries', {
+            fetch(SUPABASE_URL + '/functions/v1/submit-enquiry', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-                'Prefer': 'return=minimal'
-              },
+              headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)
             }).then(function (res) {
               if (!res.ok) {
@@ -205,6 +211,7 @@
               console.error('Enquiry submit failed', err);
               setStatus('Sorry — could not send. Please call us or try again.', 'err');
             }).then(function () {
+              try { if (window.turnstile) turnstile.reset(); } catch (e) {}
               btn.disabled = false;
               if (label) label.textContent = originalLabel;
             });

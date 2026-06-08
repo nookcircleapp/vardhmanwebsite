@@ -22,6 +22,7 @@
 <link rel="dns-prefetch" href="https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css?v=20260652">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script type="application/ld+json">
 {
@@ -260,6 +261,7 @@
           <div class="field"><label for="eb-phone">WhatsApp / Phone</label><input type="tel" id="eb-phone" name="phone" required inputmode="numeric" maxlength="10" pattern="\d{10}" title="Enter a 10-digit phone number" placeholder="10-digit number"></div>
         </div>
         <div class="field"><label for="eb-email">Email</label><input type="email" id="eb-email" name="email" required placeholder="you@gmail.com"></div>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADgwpTMYgItPwEta" data-theme="light" style="margin-bottom:1rem"></div>
         <button type="submit" class="btn btn-primary ebook-submit-btn" id="ebookSubmitBtn"><span class="btn-label">Send me the ebook</span> <span class="arrow">→</span></button>
         <div id="ebookStatus" class="enquiry-status" role="status" aria-live="polite"></div>
       </form>
@@ -325,6 +327,14 @@
     if (label) label.textContent = 'Sending…';
     setStatus('', '');
 
+    var turnstileToken = (window.turnstile && typeof turnstile.getResponse === 'function') ? turnstile.getResponse() : (form.querySelector('[name="cf-turnstile-response"]') || {}).value;
+    if (!turnstileToken) {
+      setStatus('Please complete the CAPTCHA above.', 'err');
+      btn.disabled = false;
+      if (label) label.textContent = originalLabel;
+      return;
+    }
+
     var payload = {
       name: form.name.value.trim(),
       phone: form.phone.value.trim(),
@@ -332,17 +342,13 @@
       project: 'Ebook — 7 Things to consider before buying a house in Bhopal',
       message: 'Ebook download request',
       source_url: window.location.href,
-      user_agent: navigator.userAgent
+      user_agent: navigator.userAgent,
+      turnstileToken: turnstileToken
     };
 
-    fetch(SUPABASE_URL + '/rest/v1/enquiries', {
+    fetch(SUPABASE_URL + '/functions/v1/submit-enquiry', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        'Prefer': 'return=minimal'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     }).then(function (res) {
       if (!res.ok) { return res.text().then(function (t) { throw new Error(t || ('HTTP ' + res.status)); }); }
@@ -358,6 +364,7 @@
       console.error('Ebook submit failed', err);
       setStatus('Sorry — could not send. Please call us on +91 88713 39894.', 'err');
     }).then(function () {
+      try { if (window.turnstile) turnstile.reset(); } catch (e) {}
       btn.disabled = false;
       if (label) label.textContent = originalLabel;
     });
