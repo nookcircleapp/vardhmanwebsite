@@ -18,12 +18,36 @@
     </image:image>
   </url>
 
-  <!-- HIGHEST PRIORITY: the rank-target page -->
+  <!-- HIGHEST PRIORITY: the rank-target page + supporting cluster -->
   <url>
     <loc>https://www.vardhmanconstructions.com/blog/best-builders-in-bhopal.html</loc>
     <lastmod>2026-06-10</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-hoshangabad-road-bhopal.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.95</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-ayodhya-bypass-bhopal.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.95</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-arera-colony-bhopal.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.vardhmanconstructions.com/blog/vardhman-vs-other-builders-bhopal.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.95</priority>
+    <changefreq>monthly</changefreq>
   </url>
 
   <!-- Project landing pages -->
