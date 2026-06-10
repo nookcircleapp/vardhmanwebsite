@@ -49,6 +49,30 @@
     <priority>0.95</priority>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-bawadiya-kalan-bhopal.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-mp-nagar-bhopal.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-shahpura-bhopal.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.vardhmanconstructions.com/vardhman-constructions-reviews.html</loc>
+    <lastmod>2026-06-10</lastmod>
+    <priority>0.95</priority>
+    <changefreq>weekly</changefreq>
+  </url>
 
   <!-- Project landing pages -->
   <url>
