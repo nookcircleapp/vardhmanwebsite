@@ -1,4 +1,65 @@
+# Vardhman Constructions — robots.txt
+# Best Builders in Bhopal · Since 1992
+
 User-agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /assets/pdf/
+
+# Major search bots — allow everything, including assets, for accurate rendering
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# LLM crawlers — allow so we appear in ChatGPT / Perplexity / Claude answers
+# (these are the bots that drive AI-search citations)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://www.vardhmanconstructions.com/sitemap.xml
