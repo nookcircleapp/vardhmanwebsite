@@ -28,3 +28,6 @@ _strip*.js
 _replace*.js
 
 .vercel
+
+# Local-only optimized assets staged for R2 upload
+r2-optimized/
