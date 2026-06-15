@@ -749,4 +749,36 @@ function durationSince(iso) {
   return Math.floor(sec/3600) + 'h ' + Math.floor((sec%3600)/60) + 'm';
 }
 
+// ---------- DRAWER + TABS ----------
+(function wireDrawer() {
+  const btn      = document.getElementById('hamburgerBtn');
+  const drawer   = document.getElementById('drawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+  const close    = document.getElementById('drawerClose');
+  if (!btn || !drawer || !backdrop) return;
+
+  function open()  { drawer.classList.add('open'); backdrop.classList.add('open'); btn.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false'); }
+  function shut()  { drawer.classList.remove('open'); backdrop.classList.remove('open'); btn.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); }
+
+  btn.addEventListener('click', () => drawer.classList.contains('open') ? shut() : open());
+  backdrop.addEventListener('click', shut);
+  if (close) close.addEventListener('click', shut);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+
+  document.querySelectorAll('.drawer-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tab = link.dataset.tab;
+      switchTab(tab);
+      shut();
+    });
+  });
+})();
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.toggle('active', p.dataset.tab === tab));
+  document.querySelectorAll('.drawer-link').forEach(l => l.classList.toggle('active', l.dataset.tab === tab));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 checkSession();

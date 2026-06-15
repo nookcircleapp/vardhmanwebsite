@@ -7,7 +7,7 @@
 <title>Vardhman Dashboard</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/dashboard/dashboard.css?v=18">
+<link rel="stylesheet" href="/dashboard/dashboard.css?v=19">
 </head>
 <body>
 
@@ -38,10 +38,41 @@
     <div class="user">
       <span id="whoami"></span>
       <button class="signout" id="signOutBtn">Sign out</button>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 
+  <!-- SIDE DRAWER -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <nav class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="drawer-title">Sections</span>
+      <button class="drawer-close" id="drawerClose" type="button" aria-label="Close menu">×</button>
+    </div>
+    <a href="#" class="drawer-link active" data-tab="overview">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+      Overview
+    </a>
+    <a href="#" class="drawer-link" data-tab="visitors">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Visitors
+    </a>
+    <a href="#" class="drawer-link" data-tab="enquiries">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Enquiries
+    </a>
+    <a href="#" class="drawer-link" data-tab="articles">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Articles
+    </a>
+  </nav>
+
   <div class="main">
+
+  <!-- ============ OVERVIEW TAB ============ -->
+  <section class="tab-pane active" data-tab="overview">
 
     <!-- VISITOR STATS CARDS -->
     <div class="stat-grid" id="statGrid">
@@ -70,8 +101,13 @@
       </div>
     </div>
 
+  </section>
+
+  <!-- ============ VISITORS TAB ============ -->
+  <section class="tab-pane" data-tab="visitors">
+
     <!-- VISITOR SESSIONS -->
-    <div class="section-head" style="margin-top:3rem">
+    <div class="section-head">
       <h2>Visitor sessions <small id="sessionsCount">—</small></h2>
       <button id="refreshSessionsBtn" class="export-btn" type="button" title="Reload latest sessions">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
@@ -99,17 +135,22 @@
       <div class="empty-state"><div class="big">Loading…</div></div>
     </div>
 
-    <!-- Session journey modal -->
-    <div class="journey-modal" id="journeyModal" aria-hidden="true">
-      <div class="journey-card">
-        <div class="journey-head">
-          <h3 id="journeyTitle">Session journey</h3>
-          <button class="journey-close" id="journeyClose" type="button" aria-label="Close">×</button>
-        </div>
-        <div class="journey-meta" id="journeyMeta"></div>
-        <div class="journey-timeline" id="journeyTimeline"></div>
+  </section>
+
+  <!-- Session journey modal (lives outside tabs) -->
+  <div class="journey-modal" id="journeyModal" aria-hidden="true">
+    <div class="journey-card">
+      <div class="journey-head">
+        <h3 id="journeyTitle">Session journey</h3>
+        <button class="journey-close" id="journeyClose" type="button" aria-label="Close">×</button>
       </div>
+      <div class="journey-meta" id="journeyMeta"></div>
+      <div class="journey-timeline" id="journeyTimeline"></div>
     </div>
+  </div>
+
+  <!-- ============ ENQUIRIES TAB ============ -->
+  <section class="tab-pane" data-tab="enquiries">
 
     <!-- ENQUIRIES -->
     <div class="section-head">
@@ -142,8 +183,13 @@
 
     <div class="enq-list" id="enqList"></div>
 
+  </section>
+
+  <!-- ============ ARTICLES TAB ============ -->
+  <section class="tab-pane" data-tab="articles">
+
     <!-- TOP ARTICLES -->
-    <div class="section-head" style="margin-top:3rem">
+    <div class="section-head">
       <h2>Top articles <small id="topArticlesTotal">—</small></h2>
       <button id="refreshArticlesBtn" class="export-btn" type="button" title="Reload latest view counts">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
@@ -154,10 +200,12 @@
       <div class="empty-state"><div class="big">Loading…</div></div>
     </div>
 
+  </section>
+
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/dashboard/dashboard.js?v=18"></script>
+<script src="/dashboard/dashboard.js?v=19"></script>
 </body>
 </html>
