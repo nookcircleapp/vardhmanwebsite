@@ -101,7 +101,229 @@ async function bootApp() {
   subscribePresence();
   liveTickInterval = setInterval(renderLive, 5000);
   loadTopArticles();
+  loadVisitorStats();
+  loadSessions();
+  // Refresh stats + sessions every 30s
+  setInterval(loadVisitorStats, 30000);
+  setInterval(loadSessions, 60000);
 }
+
+// ---------- VISITOR STATS ----------
+async function loadVisitorStats() {
+  const { data, error } = await sb.rpc('get_visitor_stats');
+  if (error || !data) return;
+  const row = Array.isArray(data) ? data[0] : data;
+  if (!row) return;
+  const set = (id, n) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = (n == null ? '—' : Number(n).toLocaleString('en-IN'));
+  };
+  set('statLiveNow',        row.live_now);
+  set('statVisitorsToday',  row.visitors_today);
+  set('statSessionsToday',  row.sessions_today);
+  set('statPageviewsToday', row.pageviews_today);
+  set('statBouncesToday',   row.bounces_today);
+  set('statSessionsAll',    row.sessions_all_time);
+}
+
+// ---------- SESSIONS LIST ----------
+let sessionsRangeDays = 1;
+let sessionsBounceFilter = 'all';
+
+async function loadSessions() {
+  const list = document.getElementById('sessionsList');
+  if (!list) return;
+  let q = sb.from('visitor_sessions')
+    .select('session_id,visitor_id,started_at,last_seen,ip_country,ip_region,ip_city,device_type,browser,os,landing_page,referrer,utm_source,utm_medium,utm_campaign,pageviews_count,clicks_count,is_bounce,user_agent')
+    .order('started_at', { ascending: false })
+    .limit(200);
+
+  if (sessionsRangeDays !== 'all') {
+    const since = new Date(Date.now() - sessionsRangeDays * 86400000).toISOString();
+    q = q.gte('started_at', since);
+  }
+  if (sessionsBounceFilter === 'bounce')  q = q.eq('is_bounce', true);
+  if (sessionsBounceFilter === 'engaged') q = q.eq('is_bounce', false);
+
+  const { data, error } = await q;
+  if (error) {
+    list.replaceChildren(makeEmpty('Could not load sessions', error.message || ''));
+    return;
+  }
+  const rows = data || [];
+  const countEl = document.getElementById('sessionsCount');
+  if (countEl) countEl.textContent = rows.length + (rows.length === 200 ? '+' : '');
+
+  list.replaceChildren();
+  if (rows.length === 0) {
+    list.appendChild(makeEmpty('No sessions in this range', 'New sessions will appear here as visitors browse the site.'));
+    return;
+  }
+
+  const head = el('div', 'sess-row head');
+  ['Time','Visitor','Location','Device','Landing','Duration','Clicks'].forEach(t => head.appendChild(el('div','',t)));
+  list.appendChild(head);
+
+  rows.forEach(r => {
+    const row = el('div','sess-row');
+    row.dataset.id = r.session_id;
+    row.addEventListener('click', () => openJourney(r));
+
+    const t = new Date(r.started_at);
+    const tStr = t.toLocaleString('en-IN', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit', hour12:true });
+    row.appendChild(el('div','sess-time', tStr));
+
+    const vis = el('div','sess-visitor', shortId(r.visitor_id));
+    if (r.is_bounce) {
+      const tag = el('span','sess-bounce-tag','bounce'); vis.appendChild(tag);
+    }
+    if (r.utm_source) {
+      const tag = el('span','sess-utm-tag', r.utm_source); vis.appendChild(tag);
+    }
+    row.appendChild(vis);
+
+    row.appendChild(el('div','sess-loc', fmtLoc(r)));
+    row.appendChild(el('div','sess-dev', fmtDev(r)));
+    row.appendChild(el('div','sess-landing', r.landing_page || '—'));
+
+    const dur = (new Date(r.last_seen).getTime() - new Date(r.started_at).getTime()) / 1000;
+    row.appendChild(el('div','sess-dur', fmtDur(dur)));
+    row.appendChild(el('div','sess-clicks', String(r.clicks_count || 0)));
+
+    list.appendChild(row);
+  });
+}
+
+function shortId(id) { return id ? id.slice(0, 8) : '—'; }
+function fmtLoc(r) {
+  const parts = [r.ip_city, r.ip_region, r.ip_country].filter(Boolean);
+  return parts.length ? parts.join(', ') : '—';
+}
+function fmtDev(r) {
+  const parts = [r.device_type, r.browser].filter(Boolean);
+  return parts.length ? parts.join(' · ') : '—';
+}
+function fmtDur(sec) {
+  if (!Number.isFinite(sec) || sec < 0) return '—';
+  if (sec < 60) return Math.round(sec) + 's';
+  if (sec < 3600) return Math.floor(sec/60) + 'm ' + Math.round(sec%60) + 's';
+  return Math.floor(sec/3600) + 'h ' + Math.floor((sec%3600)/60) + 'm';
+}
+
+document.querySelectorAll('#rangeFilter button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#rangeFilter button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const v = b.dataset.r;
+    sessionsRangeDays = (v === 'all') ? 'all' : Number(v);
+    loadSessions();
+  });
+});
+document.querySelectorAll('#bounceFilter button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#bounceFilter button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    sessionsBounceFilter = b.dataset.b;
+    loadSessions();
+  });
+});
+const refreshSessionsBtn = document.getElementById('refreshSessionsBtn');
+if (refreshSessionsBtn) refreshSessionsBtn.addEventListener('click', () => { loadVisitorStats(); loadSessions(); });
+
+// ---------- JOURNEY MODAL ----------
+async function openJourney(session) {
+  const modal = document.getElementById('journeyModal');
+  const title = document.getElementById('journeyTitle');
+  const meta  = document.getElementById('journeyMeta');
+  const tl    = document.getElementById('journeyTimeline');
+  if (!modal || !meta || !tl) return;
+
+  title.textContent = 'Session ' + shortId(session.session_id);
+  meta.replaceChildren();
+  const dur = (new Date(session.last_seen).getTime() - new Date(session.started_at).getTime()) / 1000;
+  const metaPairs = [
+    ['Visitor',       shortId(session.visitor_id)],
+    ['Location',      fmtLoc(session)],
+    ['Device',        fmtDev(session)],
+    ['OS',            session.os || '—'],
+    ['Landing',       session.landing_page || '—'],
+    ['Referrer',      session.referrer || 'Direct'],
+    ['UTM Source',    session.utm_source || '—'],
+    ['UTM Campaign',  session.utm_campaign || '—'],
+    ['Duration',      fmtDur(dur)],
+    ['Pageviews',     String(session.pageviews_count || 0)],
+    ['Clicks',        String(session.clicks_count || 0)],
+    ['Bounce',        session.is_bounce ? 'Yes' : 'No'],
+  ];
+  metaPairs.forEach(([k,v]) => {
+    const item = el('div','journey-meta-item');
+    item.appendChild(el('span','k',k));
+    item.appendChild(el('span','v',v));
+    meta.appendChild(item);
+  });
+
+  tl.replaceChildren();
+  tl.appendChild(el('div','', 'Loading events…'));
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+
+  const { data, error } = await sb.from('visitor_events')
+    .select('event_type,occurred_at,page_path,page_title,target_text,target_tag,metadata')
+    .eq('session_id', session.session_id)
+    .order('occurred_at', { ascending: true })
+    .limit(500);
+
+  tl.replaceChildren();
+  if (error) { tl.appendChild(el('div','', 'Could not load events: ' + error.message)); return; }
+  const events = data || [];
+  if (events.length === 0) { tl.appendChild(el('div','', 'No events recorded.')); return; }
+
+  const start = new Date(session.started_at).getTime();
+  events.forEach(ev => {
+    const wrap = el('div', 'journey-event ' + ev.event_type);
+    const offset = Math.round((new Date(ev.occurred_at).getTime() - start) / 1000);
+    wrap.appendChild(el('div','je-time', '+' + offset + 's'));
+    wrap.appendChild(el('div','je-dot'));
+    const body = el('div','je-body');
+    body.appendChild(el('div','je-type', ev.event_type.replace(/_/g,' ')));
+    const detail = describeEvent(ev);
+    if (detail) body.appendChild(el('div','je-detail', detail));
+    if (ev.page_path) body.appendChild(el('div','je-path', ev.page_path));
+    wrap.appendChild(body);
+    tl.appendChild(wrap);
+  });
+}
+function describeEvent(ev) {
+  if (ev.event_type === 'pageview')      return ev.page_title || ev.page_path || '';
+  if (ev.event_type === 'session_start') return 'Started · ' + (ev.metadata && ev.metadata.referrer ? 'from ' + ev.metadata.referrer : 'direct');
+  if (ev.event_type === 'click' || ev.event_type === 'dead_click' || ev.event_type === 'rage_click') {
+    return [ev.target_tag, ev.target_text && ('"' + ev.target_text + '"')].filter(Boolean).join(' ');
+  }
+  if (ev.event_type === 'form_submit') return 'Form ' + (ev.metadata && (ev.metadata.form_id || ev.metadata.form_name) || '') +
+    (ev.metadata && ev.metadata.fields ? ' [' + ev.metadata.fields.join(', ') + ']' : '');
+  if (ev.event_type === 'scroll_depth') return (ev.metadata && ev.metadata.depth ? ev.metadata.depth + '% scrolled' : '');
+  if (ev.event_type === 'heartbeat')    return '';
+  return '';
+}
+function closeJourney() {
+  const modal = document.getElementById('journeyModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const cb = document.getElementById('journeyClose');
+  if (cb) cb.addEventListener('click', closeJourney);
+  const modal = document.getElementById('journeyModal');
+  if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeJourney(); });
+});
+// Also wire close immediately in case DOM already ready
+(function wireJourneyClose() {
+  const cb = document.getElementById('journeyClose');
+  if (cb) cb.addEventListener('click', closeJourney);
+  const modal = document.getElementById('journeyModal');
+  if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeJourney(); });
+})();
 
 // ---------- TOP ARTICLES ----------
 const ARTICLE_TITLES = {

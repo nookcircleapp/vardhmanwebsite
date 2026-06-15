@@ -7,7 +7,7 @@
 <title>Vardhman Dashboard</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/dashboard/dashboard.css?v=17">
+<link rel="stylesheet" href="/dashboard/dashboard.css?v=18">
 </head>
 <body>
 
@@ -43,6 +43,16 @@
 
   <div class="main">
 
+    <!-- VISITOR STATS CARDS -->
+    <div class="stat-grid" id="statGrid">
+      <div class="stat-card"><span class="stat-label">Live now</span><span class="stat-value" id="statLiveNow">—</span><span class="stat-sub">last 2 min</span></div>
+      <div class="stat-card"><span class="stat-label">Visitors today</span><span class="stat-value" id="statVisitorsToday">—</span><span class="stat-sub">unique, IST</span></div>
+      <div class="stat-card"><span class="stat-label">Sessions today</span><span class="stat-value" id="statSessionsToday">—</span><span class="stat-sub">IST</span></div>
+      <div class="stat-card"><span class="stat-label">Pageviews today</span><span class="stat-value" id="statPageviewsToday">—</span><span class="stat-sub">IST</span></div>
+      <div class="stat-card"><span class="stat-label">Bounces today</span><span class="stat-value" id="statBouncesToday">—</span><span class="stat-sub">&lt;30s or 1 pv</span></div>
+      <div class="stat-card"><span class="stat-label">Sessions all-time</span><span class="stat-value" id="statSessionsAll">—</span><span class="stat-sub">total</span></div>
+    </div>
+
     <!-- LIVE BAND -->
     <div class="live">
       <div class="live-count">
@@ -57,6 +67,47 @@
           </thead>
           <tbody id="liveRows"></tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- VISITOR SESSIONS -->
+    <div class="section-head" style="margin-top:3rem">
+      <h2>Visitor sessions <small id="sessionsCount">—</small></h2>
+      <button id="refreshSessionsBtn" class="export-btn" type="button" title="Reload latest sessions">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+        Refresh
+      </button>
+      <div class="filter-group">
+        <span class="filter-label">Range</span>
+        <div class="filter" id="rangeFilter">
+          <button data-r="1" class="active">24h</button>
+          <button data-r="7">7d</button>
+          <button data-r="30">30d</button>
+          <button data-r="all">All</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Type</span>
+        <div class="filter" id="bounceFilter">
+          <button data-b="all" class="active">All</button>
+          <button data-b="engaged">Engaged</button>
+          <button data-b="bounce">Bounces</button>
+        </div>
+      </div>
+    </div>
+    <div class="sessions-list" id="sessionsList">
+      <div class="empty-state"><div class="big">Loading…</div></div>
+    </div>
+
+    <!-- Session journey modal -->
+    <div class="journey-modal" id="journeyModal" aria-hidden="true">
+      <div class="journey-card">
+        <div class="journey-head">
+          <h3 id="journeyTitle">Session journey</h3>
+          <button class="journey-close" id="journeyClose" type="button" aria-label="Close">×</button>
+        </div>
+        <div class="journey-meta" id="journeyMeta"></div>
+        <div class="journey-timeline" id="journeyTimeline"></div>
       </div>
     </div>
 
@@ -107,6 +158,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/dashboard/dashboard.js?v=17"></script>
+<script src="/dashboard/dashboard.js?v=18"></script>
 </body>
 </html>

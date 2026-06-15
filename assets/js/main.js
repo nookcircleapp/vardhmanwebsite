@@ -343,6 +343,15 @@
   });
 })();
 
+// --- FULL VISITOR ANALYTICS (pageviews, clicks, scroll, forms, heartbeats) ---
+(function loadAnalytics() {
+  if (window.location.pathname.indexOf('/dashboard') === 0) return;
+  var s = document.createElement('script');
+  s.src = '/assets/js/analytics.js?v=1';
+  s.async = true;
+  document.head.appendChild(s);
+})();
+
 // --- LIVE PRESENCE TRACKING (broadcasts this visitor to the dashboard) ---
 (function loadPresence() {
   if (window.location.pathname.indexOf('/dashboard') === 0) return; // dashboard tracks itself separately
