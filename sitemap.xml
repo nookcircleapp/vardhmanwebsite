@@ -5,7 +5,7 @@
   <!-- Core -->
   <url>
     <loc>https://www.vardhmanconstructions.com/</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
     <image:image>
@@ -20,98 +20,98 @@
 
   <!-- HIGHEST PRIORITY: the rank-target page + supporting cluster -->
   <url>
-    <loc>https://www.vardhmanconstructions.com/blog/best-builders-in-bhopal.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-in-bhopal</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/blog/best-builders-hoshangabad-road-bhopal.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-hoshangabad-road-bhopal</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.95</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/blog/best-builders-ayodhya-bypass-bhopal.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-ayodhya-bypass-bhopal</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.95</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/blog/best-builders-arera-colony-bhopal.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-arera-colony-bhopal</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/blog/best-builders-bawadiya-kalan-bhopal.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-bawadiya-kalan-bhopal</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/blog/best-builders-mp-nagar-bhopal.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-mp-nagar-bhopal</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/blog/best-builders-shahpura-bhopal.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/blog/best-builders-shahpura-bhopal</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/vardhman-constructions-reviews.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/vardhman-constructions-reviews</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.95</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <!-- Project landing pages -->
   <url>
-    <loc>https://www.vardhmanconstructions.com/projects/vardhman-fairmont.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/projects/vardhman-fairmont</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.95</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/projects/vardhman-celestia.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/projects/vardhman-celestia</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.95</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.vardhmanconstructions.com/projects.html</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.vardhmanconstructions.com/projects</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <!-- Area landing pages -->
-  <url><loc>https://www.vardhmanconstructions.com/areas/hoshangabad-road.html</loc><lastmod>2026-06-10</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/areas/ayodhya-bypass.html</loc><lastmod>2026-06-10</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/areas/arera-colony.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/areas/bawadiya-kalan.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/areas/hoshangabad-road</loc><lastmod>2026-06-15</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/areas/ayodhya-bypass</loc><lastmod>2026-06-15</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/areas/arera-colony</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/areas/bawadiya-kalan</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
 
   <!-- Blog articles -->
-  <url><loc>https://www.vardhmanconstructions.com/blog/townships-in-ayodhya-bypass.html</loc><lastmod>2026-06-10</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/hoshangabad-road-vs-ayodhya-bypass.html</loc><lastmod>2026-06-10</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/rera-verification-bhopal.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/home-loans-bhopal.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/2-bhk-vs-3-bhk-bhopal.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/5-bhk-triplex-bhopal.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/bhopal-master-plan-2031.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/stamp-duty-registration-mp.html</loc><lastmod>2026-06-10</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/first-time-home-buyer-bhopal.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/commercial-property-bhopal.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/nri-buyer-guide-bhopal.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog/bhopal-vs-indore.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/townships-in-ayodhya-bypass</loc><lastmod>2026-06-15</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/hoshangabad-road-vs-ayodhya-bypass</loc><lastmod>2026-06-15</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/rera-verification-bhopal</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/home-loans-bhopal</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/2-bhk-vs-3-bhk-bhopal</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/5-bhk-triplex-bhopal</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/bhopal-master-plan-2031</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/stamp-duty-registration-mp</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/first-time-home-buyer-bhopal</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/commercial-property-bhopal</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/nri-buyer-guide-bhopal</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog/bhopal-vs-indore</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
 
   <!-- Ebook + supporting -->
-  <url><loc>https://www.vardhmanconstructions.com/7-things-buying-house-bhopal.html</loc><lastmod>2026-06-10</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/about.html</loc><lastmod>2026-06-10</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/services.html</loc><lastmod>2026-06-10</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/contact.html</loc><lastmod>2026-06-10</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.vardhmanconstructions.com/blog.html</loc><lastmod>2026-06-10</lastmod><priority>0.75</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/7-things-buying-house-bhopal</loc><lastmod>2026-06-15</lastmod><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/about</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/services</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/contact</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.vardhmanconstructions.com/blog</loc><lastmod>2026-06-15</lastmod><priority>0.75</priority><changefreq>weekly</changefreq></url>
 </urlset>

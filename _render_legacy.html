@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Legacy Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Roboto:wght@300;400;500;700&family=Roboto+Serif:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EDE4D0;
+    --bg-soft: #F2EAD7;
+    --ink: #2A1F12;
+    --ink-soft: #4A3B26;
+    --gold: #9C7A35;
+    --gold-bright: #C9A35B;
+    --gold-deep: #6B5121;
+    --line: rgba(156,122,53,0.32);
+    --line-soft: rgba(156,122,53,0.18);
+    --font-cursive: 'Cormorant Garamond', serif;
+    --font-sans: 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+  body {
+    position: relative;
+    padding: 110px 110px 90px;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Blurred architectural backdrop */
+  .bg-blur {
+    position: fixed;
+    inset: -80px;
+    background-image: url('assets/images/img12.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(60px) saturate(0.55) brightness(1.05);
+    opacity: 0.22;
+    z-index: 0;
+  }
+  .bg-wash {
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at center, rgba(237,228,208,0.45) 0%, rgba(237,228,208,0.95) 70%, rgba(220,204,176,0.98) 100%),
+      linear-gradient(180deg, rgba(255,247,232,0.4), rgba(220,204,176,0.4));
+    z-index: 1;
+  }
+  .bg-grain {
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.15 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.05;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  .frame { position: relative; z-index: 5; }
+
+  .deco {
+    position: absolute;
+    top: -10px;
+    right: -60px;
+    font-family: var(--font-cursive);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 460px;
+    line-height: 1;
+    color: rgba(107,81,33,0.07);
+    letter-spacing: -0.03em;
+    pointer-events: none;
+    user-select: none;
+    z-index: 3;
+  }
+
+  /* Letterhead */
+  .letterhead {
+    text-align: left;
+    margin-bottom: 60px;
+    position: relative;
+  }
+  .crest {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--gold);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .crest .rule { width: 56px; height: 1px; background: var(--gold); opacity: 0.55; }
+  .crest .rule.lead { width: 28px; }
+  .crest .dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
+  .letterhead .est {
+    font-family: var(--font-cursive);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  /* Hero headline */
+  .head {
+    text-align: left;
+    margin: 0 0 80px;
+    max-width: 1700px;
+    position: relative;
+  }
+  .eyebrow {
+    color: var(--gold);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+  }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 112px;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  h1 .it {
+    font-family: var(--font-cursive);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold-deep);
+    letter-spacing: -0.005em;
+  }
+  .head .sub {
+    margin-top: 28px;
+    font-family: var(--font-cursive);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    max-width: 760px;
+  }
+
+  /* Grid of projects */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0 8px;
+    position: relative;
+    z-index: 5;
+    margin-top: 30px;
+  }
+  .card {
+    padding: 44px 22px 48px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+    min-height: 210px;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: 0;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px rgba(237,228,208,1);
+  }
+  .year {
+    font-family: var(--font-cursive);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 30px;
+    color: var(--gold-deep);
+    display: block;
+    margin-bottom: 22px;
+    letter-spacing: 0.01em;
+  }
+  .tag {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.7;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .name {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .ongoing {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: var(--font-sans);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    padding: 5px 11px;
+    border: 1px solid rgba(107,81,33,0.45);
+    border-radius: 999px;
+    background: rgba(255,247,232,0.4);
+  }
+
+  .closer {
+    border-top-color: transparent !important;
+  }
+  .closer::before { display: none; }
+  .closer .name {
+    font-family: var(--font-cursive);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 28px;
+    color: var(--gold-deep);
+  }
+  .closer .tag { color: var(--gold); opacity: 0.85; }
+
+  /* Footer rail */
+  .footer {
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    position: relative; z-index: 5;
+  }
+  .footer .span {
+    font-family: var(--font-cursive);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--gold-deep);
+    letter-spacing: 0.04em;
+  }
+  .track {
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--gold), rgba(156,122,53,0.15));
+  }
+  .count {
+    font-family: var(--font-sans);
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .count b { color: var(--gold-deep); font-weight: 500; font-family: var(--font-cursive); font-style: italic; font-size: 26px; margin-right: 4px; }
+
+  /* Wordmark block */
+  .wordmarks {
+    margin-top: 90px;
+    padding-top: 64px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 160px;
+    position: relative; z-index: 5;
+  }
+  .wm { text-align: center; }
+  .wm-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .wm-mark {
+    font-family: var(--font-cursive);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 120px;
+    letter-spacing: 0.005em;
+    line-height: 1;
+    background: linear-gradient(180deg, #C9A35B 0%, #9C7A35 50%, #5C4318 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--gold-deep);
+    margin-bottom: 16px;
+    text-shadow: 0 1px 0 rgba(255,247,232,0.4);
+  }
+  .wm-sub {
+    color: var(--ink-soft);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .wm-divider {
+    width: 1px; height: 120px;
+    background: linear-gradient(180deg, transparent, rgba(156,122,53,0.55), transparent);
+  }
+
+  .colophon {
+    margin-top: 70px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-family: var(--font-cursive);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    opacity: 0.8;
+    position: relative; z-index: 5;
+  }
+  .colophon .sep { color: var(--gold); margin: 0 14px; }
+</style>
+</head>
+<body>
+  <div class="bg-blur"></div>
+  <div class="bg-wash"></div>
+  <div class="bg-grain"></div>
+
+  <div class="frame">
+    <div class="deco">legacy.</div>
+
+    <div class="letterhead">
+      <div class="crest">
+        <span class="rule lead"></span>
+        <span>Vardhman Constructions</span>
+        <span class="dot"></span>
+        <span>Bhopal</span>
+      </div>
+      <div class="est">Established 1992</div>
+    </div>
+
+    <div class="head">
+      <div class="eyebrow">Our Legacy</div>
+      <h1>Twenty-one <span class="it">addresses</span>,<br>written into Bhopal.</h1>
+      <div class="sub">Three decades of homes, planned for the families who outlast the buildings around them.</div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><span class="year">1992</span><div class="tag">Residential · Where it began</div><div class="name">Pulkit Apartments</div></div>
+      <div class="card"><span class="year">1996</span><div class="tag">Residential · Heritage</div><div class="name">Radha Vallabh Complex</div></div>
+      <div class="card"><span class="year">1999</span><div class="tag">Residential Township</div><div class="name">Vardhman Green City</div></div>
+      <div class="card"><span class="year">2000</span><div class="tag">Multi-Phase Residential</div><div class="name">Vardhman Green Valley</div></div>
+      <div class="card"><span class="year">2002</span><div class="tag">Multi-Phase Residential</div><div class="name">Green Valley Extension</div></div>
+
+      <div class="card"><span class="year">2003</span><div class="tag">Multi-Phase Residential</div><div class="name">Vardhman Green City Extension</div></div>
+      <div class="card"><span class="year">2004</span><div class="tag">Park-Side Living</div><div class="name">Vardhman Green Park I</div></div>
+      <div class="card"><span class="year">2006</span><div class="tag">Retail · Commercial</div><div class="name">Vardhman City Plaza</div></div>
+      <div class="card"><span class="year">2006</span><div class="tag">Residential</div><div class="name">Vardhman Parisar</div></div>
+      <div class="card"><span class="year">2007</span><div class="tag">Park-Side Living</div><div class="name">Vardhman Green Park II</div></div>
+
+      <div class="card"><span class="year">2010</span><div class="tag">Park-Side · Lotus, Lily, Orchid</div><div class="name">Vardhman Green Park III</div></div>
+      <div class="card"><span class="year">2011</span><div class="tag">Residential</div><div class="name">Vardhman Green Campus</div></div>
+      <div class="card"><span class="year">2012</span><div class="tag">Private Residential</div><div class="name">Vardhman Green Enclave</div></div>
+      <div class="card"><span class="year">2013</span><div class="tag">Integrated Township</div><div class="name">Vardhman City</div></div>
+      <div class="card"><span class="year">2016</span><div class="tag">Integrated Township</div><div class="name">Vardhman City II</div></div>
+
+      <div class="card"><span class="year">2019</span><div class="tag">Premium Residential</div><div class="name">Shikhar Meridian</div></div>
+      <div class="card"><span class="year">2020</span><div class="tag">Healthcare · Commercial</div><div class="name">Vardhman Medical Plaza</div></div>
+      <div class="card"><span class="year">2020</span><div class="tag">Healthcare · Commercial</div><div class="name">Vardhman Medical Plaza II</div></div>
+      <div class="card"><span class="year">2021</span><div class="tag">Retail · Commercial</div><div class="name">Vardhman City Plaza II</div></div>
+      <div class="card"><span class="year">2023</span><div class="tag">Luxury Triplex · Hoshangabad Rd</div><div class="name">Vardhman Fairmont</div><span class="ongoing">Possession 2026</span></div>
+
+      <div class="card"><span class="year">2025</span><div class="tag">Premium Residential</div><div class="name">Vardhman Celestia</div><span class="ongoing">Launching</span></div>
+      <div class="card closer"><span class="year" style="opacity:0">—</span><div class="tag">Since 1992</div><div class="name">Twenty-one &amp; counting.</div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="footer">
+      <span class="span">1992 → 2025</span>
+      <div class="track"></div>
+      <div class="count"><b>21</b> / 21 Addresses</div>
+    </div>
+
+    <div class="wordmarks">
+      <div class="wm">
+        <div class="wm-eyebrow">Now Delivering</div>
+        <div class="wm-mark">Fairmont</div>
+        <div class="wm-sub">Luxury Triplex · Hoshangabad Rd</div>
+      </div>
+      <div class="wm-divider"></div>
+      <div class="wm">
+        <div class="wm-eyebrow">Now Launching</div>
+        <div class="wm-mark">Celestia</div>
+        <div class="wm-sub">Premium Residential · Ayodhya Bypass</div>
+      </div>
+    </div>
+
+    <div class="colophon">
+      Vardhman Constructions <span class="sep">·</span> 130, Malviya Nagar, Bhopal <span class="sep">·</span> vardhmanconstructions.com
+    </div>
+  </div>
+</body>
+</html>
