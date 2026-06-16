@@ -145,22 +145,6 @@
     });
   });
 
-  // Contact form (no backend — opens mailto)
-  const form = document.querySelector('.contact-form');
-  if (form) {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const d = new FormData(form);
-      const name = d.get('name') || '';
-      const email = d.get('email') || '';
-      const phone = d.get('phone') || '';
-      const project = d.get('project') || '';
-      const message = d.get('message') || '';
-      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0AInterested in: ${project}%0D%0A%0D%0A${message}`;
-      window.location.href = `mailto:vardhmanbhopal130@gmail.com?subject=Website Enquiry from ${encodeURIComponent(name)}&body=${body}`;
-    });
-  }
-
   // Lightbox (photo carousel)
   const lightbox = document.querySelector('[data-lightbox]');
   if (lightbox) {
