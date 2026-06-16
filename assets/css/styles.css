@@ -1103,6 +1103,10 @@ section { position: relative; }
   inset: 0;
   z-index: 0;
   overflow: hidden;
+  background-image: url('https://pub-559c2242a7814416ac915450e8dea2e4.r2.dev/vardhman%20images%20and%20reels/Vardhman%20Images%20and%20videos/fairmontbg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: #0B0B0B;
 }
 .hero-edit-video video,
 .hero-edit-video img {
