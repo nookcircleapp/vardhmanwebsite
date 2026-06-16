@@ -104,6 +104,9 @@
           var status = document.getElementById('enquiryStatus');
           var modal = document.getElementById('enquiryModal');
           if (!form) return;
+          if (modal && modal.parentNode !== document.body) {
+            document.body.appendChild(modal);
+          }
           var label = btn.querySelector('.btn-label');
           var originalLabel = label ? label.textContent : 'Send Enquiry';
 
