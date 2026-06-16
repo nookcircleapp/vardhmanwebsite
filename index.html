@@ -164,56 +164,47 @@
     </video>
   </div>
   <script>
-    // Hero video resilience — force autoplay, recover from stalls, fall back to poster on hard failure
+    // Hero video resilience — never give up. Keep retrying until the video plays.
     (function () {
       var v = document.querySelector('[data-hero-video]');
       if (!v) return;
       v.muted = true;
       v.setAttribute('muted', '');
-      var retries = 0;
-      var MAX_RETRIES = 4;
       var stalledTimer = null;
+      var isPlaying = false;
       var attempt = function () { try { var p = v.play(); if (p && p.catch) p.catch(function(){}); } catch (e) {} };
       var clearStallTimer = function () { if (stalledTimer) { clearTimeout(stalledTimer); stalledTimer = null; } };
-      var armStallTimer = function () {
+      var armStallTimer = function (delay) {
         clearStallTimer();
         stalledTimer = setTimeout(function () {
-          // If we still haven't started playing, force a reload of the source
-          if (v.readyState < 3 && retries < MAX_RETRIES) {
-            retries++;
+          if (!isPlaying || v.paused) {
             try { v.load(); } catch (e) {}
             attempt();
-            armStallTimer();
+            armStallTimer(10000);
           }
-        }, 6000);
+        }, delay || 10000);
       };
-      var giveUp = function () {
-        clearStallTimer();
-        // Hide the broken video element so the CSS background poster shows cleanly
-        v.style.display = 'none';
-      };
-      if (v.readyState >= 2) attempt();
+      v.addEventListener('playing', function () { isPlaying = true; clearStallTimer(); });
+      v.addEventListener('pause', function () { isPlaying = false; if (!document.hidden) attempt(); });
+      v.addEventListener('ended', attempt);
       v.addEventListener('loadeddata', attempt);
       v.addEventListener('canplay', function () { clearStallTimer(); attempt(); });
-      v.addEventListener('playing', clearStallTimer);
-      v.addEventListener('stalled', armStallTimer);
-      v.addEventListener('suspend', armStallTimer);
-      v.addEventListener('waiting', armStallTimer);
-      v.addEventListener('error', function () {
-        if (retries < MAX_RETRIES) { retries++; try { v.load(); } catch (e) {} attempt(); armStallTimer(); }
-        else { giveUp(); }
-      });
-      // Source-level error (e.g. R2 returns 5xx) — also retry
+      v.addEventListener('canplaythrough', attempt);
+      v.addEventListener('stalled', function () { armStallTimer(8000); });
+      v.addEventListener('suspend', function () { if (!isPlaying) armStallTimer(8000); });
+      v.addEventListener('waiting', function () { armStallTimer(12000); });
+      v.addEventListener('error', function () { try { v.load(); } catch (e) {} attempt(); armStallTimer(8000); });
       var src = v.querySelector('source');
-      if (src) src.addEventListener('error', function () {
-        if (retries < MAX_RETRIES) { retries++; try { v.load(); } catch (e) {} attempt(); armStallTimer(); }
-        else { giveUp(); }
-      });
-      document.addEventListener('visibilitychange', function () { if (!document.hidden) attempt(); });
-      var kick = function () { attempt(); window.removeEventListener('touchstart', kick); window.removeEventListener('click', kick); };
+      if (src) src.addEventListener('error', function () { try { v.load(); } catch (e) {} attempt(); armStallTimer(8000); });
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) { attempt(); if (!isPlaying) armStallTimer(6000); } });
+      var kick = function () { attempt(); window.removeEventListener('touchstart', kick); window.removeEventListener('click', kick); window.removeEventListener('scroll', kick); };
       window.addEventListener('touchstart', kick, { passive: true });
       window.addEventListener('click', kick);
-      armStallTimer();
+      window.addEventListener('scroll', kick, { passive: true });
+      // Heartbeat — every 15s, if not playing, kick it
+      setInterval(function () { if (!isPlaying || v.paused) { try { v.load(); } catch (e) {} attempt(); } }, 15000);
+      if (v.readyState >= 2) attempt();
+      armStallTimer(10000);
     })();
   </script>
   <div class="hero-edit-corner">Celestia · Ayodhya Bypass</div>
