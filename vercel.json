@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/copy-of-vardhman-fairmont", "destination": "/projects/vardhman-fairmont", "permanent": true },
+    { "source": "/copy-of-vardhman-fairmont/", "destination": "/projects/vardhman-fairmont", "permanent": true },
+    { "source": "/copy-of-:slug*", "destination": "/projects/:slug*", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*\\.html)",
