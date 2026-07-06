@@ -47,10 +47,15 @@ function showLogin() {
   loginView.style.display = 'grid';
   appView.classList.remove('show');
 }
+// Friendly display names (login email/password stay the same).
+const DISPLAY_NAMES = { 'admin@vardhman.com': 'Boss' };
+function displayName(email) {
+  return DISPLAY_NAMES[(email || '').toLowerCase()] || email;
+}
 function showApp(user) {
   loginView.style.display = 'none';
   appView.classList.add('show');
-  whoami.textContent = user.email;
+  whoami.textContent = displayName(user.email);
   applyRoleScope(user.email);
   bootApp();
 }
