@@ -5101,3 +5101,8 @@ a.vlist-item:hover .vlist-arrow { opacity: 1; transform: translateX(0); }
   .dl-card--wide .dl-thumb { max-width: none; }
   .dl-actions .dl-btn { flex: 1 1 auto; justify-content: center; }
 }
+
+/* Hero: room for two stacked tertiary links below the CTA buttons on tablet/phone */
+@media (max-width: 1100px) {
+  .hero-edit:has(.hero-edit-tertiary) { padding-bottom: 5.5rem; }
+}
