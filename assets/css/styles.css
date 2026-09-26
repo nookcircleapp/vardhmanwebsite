@@ -5106,5 +5106,5 @@ a.vlist-item:hover .vlist-arrow { opacity: 1; transform: translateX(0); }
 
 /* Hero: room for two stacked tertiary links below the CTA buttons on tablet/phone */
 @media (max-width: 1100px) {
-  .hero-edit:has(.hero-edit-tertiary) { padding-bottom: 5.5rem; }
+  .hero-edit:has(.hero-edit-tertiary) { padding-bottom: 7.25rem; }
 }
