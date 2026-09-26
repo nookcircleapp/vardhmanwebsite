@@ -5097,8 +5097,10 @@ a.vlist-item:hover .vlist-arrow { opacity: 1; transform: translateX(0); }
 .status-banner strong { color: #92cdff; }
 @media (max-width: 560px) {
   .dl-card { grid-template-columns: 1fr; }
-  .dl-thumb { max-width: 180px; }
-  .dl-card--wide .dl-thumb { max-width: none; }
+  .dl-thumb { width: 100%; max-width: none; aspect-ratio: 16 / 10; }
+  .dl-thumb img { object-position: center top; }
+  .dl-card--wide .dl-thumb { aspect-ratio: 4 / 3; }
+  .dl-card--wide .dl-thumb img { object-position: center; }
   .dl-actions .dl-btn { flex: 1 1 auto; justify-content: center; }
 }
 
