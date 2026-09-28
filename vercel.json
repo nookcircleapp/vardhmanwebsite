@@ -5,7 +5,9 @@
   "redirects": [
     { "source": "/copy-of-vardhman-fairmont", "destination": "/projects/vardhman-fairmont", "permanent": true },
     { "source": "/copy-of-vardhman-fairmont/", "destination": "/projects/vardhman-fairmont", "permanent": true },
-    { "source": "/copy-of-:slug*", "destination": "/projects/:slug*", "permanent": true }
+    { "source": "/copy-of-:slug*", "destination": "/projects/:slug*", "permanent": true },
+    { "source": "/blog/bhopal-master-plan-2047-pdf-download", "destination": "/blog/bhopal-master-plan-2047#download", "permanent": true },
+    { "source": "/blog/bhopal-master-plan-2047-pdf-download.html", "destination": "/blog/bhopal-master-plan-2047#download", "permanent": true }
   ],
   "headers": [
     {
