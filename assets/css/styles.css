@@ -5161,3 +5161,14 @@ a.vlist-item:hover .vlist-arrow { opacity: 1; transform: translateX(0); }
   .nav-links .nav-drop-menu a:hover { background: none; }
   .nav-links .nav-drop-menu .nav-drop-all { border-top: 0; margin-top: 0.1rem; }
 }
+
+/* Contact: office hours rows */
+.hours-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+.hours-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.hours-day { font-size: 1rem; font-weight: 500; color: var(--text); }
+.hours-time { font-size: 1rem; font-weight: 500; color: var(--gold); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hours-note { color: var(--text-muted); font-weight: 400; }
+@media (max-width: 480px) {
+  .hours-list { gap: 0.9rem; }
+  .hours-list li { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+}
