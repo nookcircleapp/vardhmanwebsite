@@ -375,14 +375,19 @@
   };
   var chev = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
   var ext = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+  var doc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>';
   var dl = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
 
-  var main = ['Fairmont', 'Celestia', 'All Projects', 'About'].map(byText).filter(Boolean);
+  var main = ['Fairmont', 'Celestia', 'All Projects', 'About', 'Ebook'].map(byText).filter(Boolean);
   var contact = byText('Contact');
   var drop = links.querySelector('.nav-drop');
   var blogsAll = drop && drop.querySelector('.nav-drop-all');
   var blogItems = drop ? Array.prototype.filter.call(drop.querySelectorAll('.nav-drop-menu a'), function (a) { return !a.classList.contains('nav-drop-all'); }) : [];
-  var featured = blogItems.shift();
+  // The newest post (marked data-newest in the desktop menu) is always the featured card.
+  var fi = blogItems.findIndex(function (a) { return a.hasAttribute('data-newest'); });
+  var featured = blogItems.splice(fi >= 0 ? fi : 0, 1)[0];
+  var label = function (a) { return (a.childNodes[0] ? a.childNodes[0].textContent : a.textContent).trim(); };
+  var tagOf = function (a) { var t = a.querySelector('.nav-drop-tag'); return t ? t.textContent.trim() : ''; };
 
   var html = '<div class="m-menu-inner">';
   html += '<div class="m-label">Projects</div><ul class="m-main">';
@@ -395,13 +400,14 @@
     html += '<div class="m-blogs-head"><div class="m-label">Blogs</div>' +
       (blogsAll ? '<a class="m-all" href="' + esc(blogsAll.getAttribute('href')) + '">All blogs <span aria-hidden="true">→</span></a>' : '') + '</div>';
     if (featured) {
-      var title = featured.childNodes[0] ? featured.childNodes[0].textContent.split('—')[0].trim() : featured.textContent.trim();
-      html += '<a class="m-feature" href="' + esc(featured.getAttribute('href')) + '"><span class="m-feature-icon">' + dl + '</span>' +
-        '<span class="m-feature-text"><span class="m-feature-tag">New · Free PDF</span><span class="m-feature-title">' + esc(title) + '</span></span>' + chev + '</a>';
+      var title = label(featured).split('—')[0].trim();
+      var isPdf = /pdf/i.test(featured.textContent);
+      html += '<a class="m-feature" href="' + esc(featured.getAttribute('href')) + '"><span class="m-feature-icon">' + (isPdf ? dl : doc) + '</span>' +
+        '<span class="m-feature-text"><span class="m-feature-tag">' + (isPdf ? 'New · Free PDF' : 'New post') + '</span><span class="m-feature-title">' + esc(title) + '</span></span>' + chev + '</a>';
     }
     html += '<ol class="m-blog-list">';
     blogItems.forEach(function (a, i) {
-      html += '<li><a href="' + esc(a.getAttribute('href')) + '"><span class="m-num">' + String(i + 1).padStart(2, '0') + '</span><span class="m-blog-title">' + esc(a.textContent.trim()) + '</span>' + ext + '</a></li>';
+      html += '<li><a href="' + esc(a.getAttribute('href')) + '"><span class="m-num">' + String(i + 1).padStart(2, '0') + '</span><span class="m-blog-title">' + esc(label(a)) + (tagOf(a) ? ' <span class="m-tag">' + esc(tagOf(a)) + '</span>' : '') + '</span>' + ext + '</a></li>';
     });
     html += '</ol>';
   }
