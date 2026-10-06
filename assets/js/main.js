@@ -362,3 +362,59 @@
   };
   document.head.appendChild(s);
 })();
+
+// --- MOBILE MENU PANEL (built from the desktop nav so every page stays in sync) ---
+(function buildMobileMenu() {
+  var links = document.querySelector('.nav-links');
+  var toggle = document.querySelector('.nav-toggle');
+  if (!links || !toggle || document.querySelector('.m-menu')) return;
+
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
+  var byText = function (t) {
+    return Array.prototype.find.call(links.querySelectorAll(':scope > a'), function (a) { return a.textContent.trim() === t; });
+  };
+  var chev = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+  var ext = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+  var dl = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
+
+  var main = ['Fairmont', 'Celestia', 'All Projects', 'About'].map(byText).filter(Boolean);
+  var contact = byText('Contact');
+  var drop = links.querySelector('.nav-drop');
+  var blogsAll = drop && drop.querySelector('.nav-drop-all');
+  var blogItems = drop ? Array.prototype.filter.call(drop.querySelectorAll('.nav-drop-menu a'), function (a) { return !a.classList.contains('nav-drop-all'); }) : [];
+  var featured = blogItems.shift();
+
+  var html = '<div class="m-menu-inner">';
+  html += '<div class="m-label">Projects</div><ul class="m-main">';
+  main.forEach(function (a) {
+    html += '<li><a href="' + esc(a.getAttribute('href')) + '"' + (a.classList.contains('active') ? ' class="active"' : '') + '><span>' + esc(a.textContent.trim()) + '</span>' + chev + '</a></li>';
+  });
+  html += '</ul>';
+
+  if (drop) {
+    html += '<div class="m-blogs-head"><div class="m-label">Blogs</div>' +
+      (blogsAll ? '<a class="m-all" href="' + esc(blogsAll.getAttribute('href')) + '">All blogs <span aria-hidden="true">→</span></a>' : '') + '</div>';
+    if (featured) {
+      var title = featured.childNodes[0] ? featured.childNodes[0].textContent.split('—')[0].trim() : featured.textContent.trim();
+      html += '<a class="m-feature" href="' + esc(featured.getAttribute('href')) + '"><span class="m-feature-icon">' + dl + '</span>' +
+        '<span class="m-feature-text"><span class="m-feature-tag">New · Free PDF</span><span class="m-feature-title">' + esc(title) + '</span></span>' + chev + '</a>';
+    }
+    html += '<ol class="m-blog-list">';
+    blogItems.forEach(function (a, i) {
+      html += '<li><a href="' + esc(a.getAttribute('href')) + '"><span class="m-num">' + String(i + 1).padStart(2, '0') + '</span><span class="m-blog-title">' + esc(a.textContent.trim()) + '</span>' + ext + '</a></li>';
+    });
+    html += '</ol>';
+  }
+  html += '</div>';
+  if (contact) html += '<div class="m-menu-foot"><a class="m-contact" href="' + esc(contact.getAttribute('href')) + '">Contact us</a></div>';
+
+  var panel = document.createElement('div');
+  panel.className = 'm-menu';
+  panel.setAttribute('aria-label', 'Mobile menu');
+  panel.innerHTML = html;
+  document.body.appendChild(panel);
+
+  panel.addEventListener('click', function (e) {
+    if (e.target.closest('a')) { toggle.classList.remove('open'); document.body.classList.remove('nav-open'); }
+  });
+})();
